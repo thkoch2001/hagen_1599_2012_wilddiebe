@@ -54,8 +54,8 @@ Angriffspunkte suchen.
 
 \Armitage{} findet Exploits in den Kategorien \texttt{http},
 \texttt{realserver}, \texttt{webapp} und \texttt{wyse}. Mit \emph{\glqq{}Check
-  Exploits\grqq{}} filtern wir erfolgsversprechende Exploits heraus. Jetzt
-bleibt nur noch \texttt{unix/webapp/basilic\_diff\_exec} übrig
+  Exploits\grqq{}} filtern wir erfolgsversprechende Exploits heraus. Als
+einzigen Treffer erhalten wir \texttt{unix/webapp/basilic\_diff\_exec}
 (vgl. \bildref{WebDatei1}). Wenden wir diesen Exploit an, führt das aber
 irgendwie nicht zum gewünschten Erfolg.
 
@@ -156,7 +156,7 @@ ist, wird er von dort aus die anderen Zimmer durchsuchen. Den Einbruch ins
 Firmennetz von \Mayerbrot{} ist uns bereits über den Dateiserver gelungen. Wir
 sollten uns fragen, ob wir diese Schwachstelle weiter ausnutzen
 können. Zumindest dürfte der Dateiserver einen gewissen Vertrauensvorsprung
-gegenüber firmenfremde Computer haben.
+gegenüber firmenfremden Computern haben.
 
 Um dies zu testen, übernehmen wir erneut den Dateiserver\footnote{dazu gehen wir
   wie in \cref{sec:dateiserverhacken} vor}. Maximale Kontrolle über den
@@ -181,7 +181,7 @@ Seite von Google kann aber aufgerufen werden. Ein Ping auf den Webserver klappt
 auch. Weitere Untersuchungen waren aber nicht möglich, da wir plötzlich nicht
 mehr ungestört waren. Der Nachteil einer VNC-Sitzung ist, dass man nicht
 unbeobachtet agieren kann. Als der Administrator sich auf System aufschaltet,
-trennen wir daher die Verbindung. Nicht einmal die notwendige Aufräumarbeiten,
+trennen wir daher die Verbindung. Nicht einmal die notwendigen Aufräumarbeiten,
 um die Spuren des Einbruchs zu beseitigen, konnten wir durchführen.
 
 \subsubsection{Zugriff mit dem Zertifikat}
