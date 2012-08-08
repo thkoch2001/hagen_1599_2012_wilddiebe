@@ -1,3 +1,159 @@
 \subsection{Rezept 2 entschlüsseln}
-\label{RezeptZweiEntschlüsseln}
+\label{RezeptZweiEntschluesseln}
 
+\begin{lstlisting}[caption={Das verschlüsselte 2. Rezept: Rezept2NR.txt},
+ linewidth=\textwidth,
+ breaklines, breakatwhitespace=false]
+HrSbkesnuz1eWbsgteeamhWbezldsiDeSgeraeuWgmneSnmmunnant
+solsrivtieuMsusrnk3eieteean0vzBribAFhkau2gh15reailsron
+n0eeeinceraa1zhsreboeonlnednnaudBciet0himareesbekqlnsn
+WleicemareknzinanasegenisznaneDnetdsgnlnsarurieadc3teb
+imeptreleDateSreaVkrhuaSfaMnneeeenftenteugabatomeacedS
+dnZmtmauhnsnBcea2GCoiesraiMnnanuroembhlsZtn5ogele17get
+WisuegmkeWe1Vlrwem5gnnmnn2ene2uhzngohcWle0l1leeWeietin
+euereLimndnheni0lseserieadcullsDenstonesedckreesesarbs
+eesueaebnSuegRgmhdaseteshbek1udeZeteaghasiSedaeidolnen
+dazctuernnneettdihaettKefgbbenntnbimrprrelsDnkfu2rdren
+aodn0uecesernealnsnae0RemTp51Suegznet30atas7gloezelSnb
+ukr5Lsm5Bwi5gbekensga0misasdDnmneeewmmssgneeaiskdseuhs
+WasNdteaioedsvcgtnirresenuglmdlhtkIgemlseneduueeegaeof
+ahdt5tkdmneetgny0aier0ls5kiholegage0gtsS0ss
+\end{lstlisting}
+
+Da lediglich wieder nur der chiffrierte Text bekannt war, wurde Ciphertext-Only
+gewählt.
+
+\begin{table}\footnotesize
+\begin{tabular}{*{26}{@{\hspace{1ex}}r}}
+ 0 & 1 & 2 & 3 & 5 & 7 & A & B & C & D & F & G & H & I & K & L & M & N & R & S & T & V & W & Z \\
+ 13 & 8 & 5 & 3 & 9 & 2 & 1 & 4 & 1 & 6 & 1 & 1 & 1 & 1 & 1 & 2 & 3 & 1 & 2 & 11 & 1 & 2 & 9 & 3 \\
+\end{tabular}
+
+\begin{tabular}{*{26}{@{\hspace{1ex}}r}}
+ a & b & c & d & e & f & g & h & i & k & l & m & n & o & p & q & r & s & t & u & v & w & y & z \\
+ 50 & 17 & 12 & 26 & 134 & 5 & 29 & 19 & 33 & 16 & 27 & 26 & 75 & 16 & 3 & 1 & 34 & 52 & 34 & 28 & 3 & 3 & 1 & 10 \\
+\end{tabular}
+\end{table}
+
+Die Häufigkeitsanalyse ergab wie auch beim 1. Rezept keine Abweichungen. Das
+dechiffrieren des Textbeginns mit der Casesar Chiffre ergibt ein sinnloses
+``EOPYHBPKRW1'', rot-13 ergibt ``UEFOXRFAHM1''.
+
+\subsubsection{Rail Fence Cipher}
+
+iese Chiffre nennt sich Rail Fence Cipher, aufgrund der Art wie der
+Chiffriervorgang abläuft. Der Klartext wird diagonal nach rechts unten auf einen
+imaginären Zaun geschrieben. Wenn das untere Ende erreicht wurde, wird diagonal
+nach rechts oben bis zum oberen Ende geschrieben, usw. bis der gesamte Klartext
+geschrieben ist.
+
+Mit einer Tiefe von zwei entsteht aus dem Beginn von Rezept 2:
+
+\begin{lstlisting}
+H r S b k e s n u z 1 e W
+ i e t i n e u e r e L i m
+\end{lstlisting}
+
+Mit einer Tiefe von drei entsteht
+
+\begin{lstlisting}
+H   r   S   b   k   e   s
+ z n a n e D n e t d s g
+  a   e   0   R   e   m
+\end{lstlisting}
+Und mit einer Tiefe von vier schließlich lässt sich ein Rezept erkennen:
+\begin{lstlisting}
+H     r     S     b     k
+ e   b o   e o   n l   n
+  i e   t i   n e   u e
+   d     D     n     m
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[caption={rafeci.c}]
+#include <stdio.h>
+
+char alphabet[1000] = {0};
+char alphabet125[125] = {0};
+char alphabet248_1[248] = {0};
+char alphabet248_2[248] = {0};
+char alphabet124[124] = {0};
+
+const int LIM1 = 125;
+const int LIM2 = 248;
+const int LIM3 = 124;
+
+int i = 0;
+int i1 = 0;
+int i2 = 0;
+
+int main()
+{
+  int c;
+
+  while ( ( c = getchar() ) != EOF ) {
+    alphabet[i++] = c;
+  }
+
+  for (i2 = 0 ; i2 < LIM1; i2++ ) {
+    alphabet125[i2] = alphabet[i1++];
+  }
+
+  for (i2 = 0 ; i2 < LIM2; i2++ ) {
+    alphabet248_1[i2] = alphabet[i1++];
+  }
+
+  for ( i2 = 0; i2 < LIM2; i2++ ) {
+    alphabet248_2[i2] = alphabet[i1++];
+  }
+
+  for ( i2 = 0; i2 < LIM3; i2++ ) {
+    alphabet124[i2] = alphabet[i1++];
+  }
+
+  for ( i2 = 0; i2 < LIM1; i2++ ) {
+    printf("\%c     ", alphabet125[i2]);
+  }
+
+  printf("\n");
+  printf(" ");
+
+  for ( i2 = 0; i2 < LIM2; i2++ ) {
+    printf("\%c   ", alphabet248_1[i2]);
+    printf("\%c ", alphabet248_1[++i2]);
+  }
+
+  printf("\n");
+  printf("  ");
+
+  for ( i2 = 0; i2 < LIM2; i2++ ) {
+    printf("%c ", alphabet248_2[i2]);
+    printf("%c   ", alphabet248_2[++i2]);
+  }
+
+  printf("\n");
+  printf("   ");
+
+  for ( i2 = 0; i2 < LIM3; i2++ ) {
+    printf("%c     ", alphabet124[i2]);
+  }
+
+  return 0;
+}
+\end{lstlisting}
+
+Das entschlüsselte Rezept lautet:
+
+Heidebrot
+
+Die Sonnenblumenkerne den Leinsamen und den Buchweizen mit 100ml heißem Wasser begießen, abgedeckt quellen lassen.
+Die Walnüsse mit kochendem Wasser bedecken kurz ziehen lassen, das Wasser abgießen. Die Nüsse zu den Saaten geben. 
+Den Sauerteig das Roggenmehl und das Wasser gut vermischen, abgedeckt 13 Stunden bei Zimmertemperatur gehen lassen.
+Die Saatenden, Sauerteig das Vollkornmehl und das Salzfracht Minuten verkneten. In eine gefettete und mit Mehl
+ausgestaubte Kastenform geben, abdecken und 3 Stunden bei Zimmertemperatur gehen lassen. Den Backofen auf 220 Grad C vorheizen
+das Brot darin 50 Minuten backen Aus der Form nehmen abkühlen lassen. 
+
+Zutaten 
+250g Roggenmehl Type 1150, 175g Sauerteig Weizensauerteig, 300ml kaltes Wasser, 175g Vollkornweizenmehl, 50g 
+Sonnenblumenkerne, 25g Leinsamen, 25g Buchweizen, 50g grobgehackte Walnüsse, 10g Salz, 100ml heißes Wasser

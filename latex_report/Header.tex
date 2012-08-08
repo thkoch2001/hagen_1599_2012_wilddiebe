@@ -21,11 +21,11 @@
 \usepackage[utf8]{inputenc}
 %\usepackage{lmodern} %Type1-Schriftart für nicht-englische Texte
 \usepackage{amsmath}
-\usepackage[activate]{pdfcprot}
+%\usepackage[activate]{pdfcprot}
 \usepackage{graphicx} % jpg  png  pdf  mps
 \usepackage{xcolor}
 \usepackage{pbox}
-\usepackage{url}
+%\usepackage{url}
 \usepackage{listings}
 \usepackage[german]{varioref}
 \usepackage{float}
@@ -115,6 +115,17 @@ basicstyle=\ttfamily%
 \setcounter{secnumdepth}{4}%   = Nummerierung vertiefen *
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\bilddatei}[3]{%
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=#3\textwidth,keepaspectratio=true]{Images/#1}
+ \caption{#2}
+ \label{fig:#1}
+\end{figure}}
+\newcommand{\bildref}[1]{\cref{fig:#1}}
+
+\newcommand{\tableref}[1]{\cref{tab:#1}}
 
 \newcommand{\Mayerbrot}{\emph{Mayer Brot}}
 \newcommand{\Muellerbrot}{\emph{Müller Brot}}
