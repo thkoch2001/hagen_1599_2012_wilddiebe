@@ -47,8 +47,8 @@ Die Häufigkeit der einzelnen Zeichen im verschlüsselten Rezept wurde mit einem
 Onlinetool\footnote{\url{http://www.woerter-zaehlen.de/index.php}} gezählt und
 ist in \cref{table:rezept1haeufigkeit} wiedergegeben.
 
-Die Häufigkeit der Buchstaben ergab keine Abweichungen.(? TODO Abweichung von
-was?)  Es wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
+Die Häufigkeitsanalyse ergab, das "e" am häufigsten auftretet.
+Es wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
 „ZZnaqryfghgra“ zu analysieren.
 
 \paragraph{Caesar Chiffre}
@@ -66,12 +66,12 @@ nach links, also mit dem Schlüssel 3, ergibt folgende Ansicht:
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
 DEFGHIJKLMNOPQRSTUVWXYZABC
 
-ZZNAQRYFGHGRA  -> WWKXNOVCDEDOX
+ZNAQRYFGHGRA  -> WKXNOVCDEDOX
 \end{lstlisting}
 
 \paragraph{Rot-13}
 
-Als nächstes wurde mittels Rot-13 das Wort „ZZNAQRYFGHGRA“ analysiert.
+Als nächstes wurde mittels Rot-13 das Wort „ZNAQRYFGHGRA“ analysiert.
 
 Werden als Alphabet die Buchstaben A-Z gewählt und ein Schlüssel von 13, so wird
 diese Chiffre auch als Rot-13 bezeichnet. Eine Verschiebung um 13 nach links,
@@ -81,7 +81,7 @@ also mit dem Schlüssel 13, ergibt folgende Ansicht:
 A B C D E F G H I J K L M
 N O P Q R S T U V W X Y Z
 
-ZZNAQRYFGHGRA -> MMANDELSTUTEN
+ZNAQRYFGHGRA -> MANDELSTUTEN
 \end{lstlisting}
 
 \begin{lstlisting}[caption=Quellcode rot13.c]
