@@ -13,3 +13,112 @@
 %
 %\bilddatei{DateiServerHacken5}{Datei herunterladen}{0.7}
 
+Um zu überprüfen, welche Dienste laufen, wird ein Portscanner für die Erkennung
+benötigt.
+
+\subsubsection{NMAP}
+
+Nmap ist wohl der bekannteste Netzwerkscanner. Er spürt aktive Hosts im Netz auf
+und nutzt eine breite Palette an Tests vom normalen TCP/IP-Handshake bis zum
+verborgenen TCP-FIN-Scan. Aufgrund der Eigenheiten der TCP/IP-Stacks erkennt
+nmap das Betriebssystem und Dienste.
+
+Unter Free-BSD kann NMap mit folgender Befehlszeile installiert werden:
+
+\begin{verbatim}
+root:~$cd /usr/ports/net/nmap && make install clean
+\end{verbatim}
+
+\begin{figure}
+\begin{lstlisting}
+#!/bin/bash
+
+DT=`/bin/date +\%H_\%M_\%S_\%d_\%m_\%y`
+LOG_FILE=scan_${DT}.log
+
+nmap -Avv 172.16.14.0/24 > $LOG_FILE
+./nsscan.sh "$LOG_FILE"
+
+\end{lstlisting}
+\caption{Script für dynamischen Portscan: nmap.sh}
+\end{figure}
+
+\begin{figure}
+\begin{lstlisting}
+#!/bin/bash
+
+ips=`cat $1 | grep "open port" | awk '{ print $6 }' | sort | uniq`
+
+for i in $ips 
+do
+  nslookup $i 172.16.19.1 >> tmp 
+done
+
+cat tmp | grep name | sort | uniq > $1_names.txt
+
+rm -f tmp
+\end{lstlisting}
+\caption{Script zur Namensauflösung: nsscan.sh}
+\end{figure}
+
+Mit Hilfe beider des Skriptes nmap.sh (das nsscan.sh intern aufruft) erhält man
+eine Liste von Hosts und ihrer offenen Ports im Netzwerk. Die Hosts werden
+zunächst als IP Adressen aufgeführt und darunter werden die dazugehörigen DNS
+Namen aufgelistet.
+\begin{figure}
+\begin{lstlisting}
+Initiating Connect Scan at 19:27
+Scanning 2 hosts [1000 ports/host]
+Discovered open port 22/tcp on 172.16.14.10
+Discovered open port 80/tcp on 172.16.14.10
+Discovered open port 445/tcp on 172.16.14.40
+Discovered open port 1025/tcp on 172.16.14.40
+Discovered open port 139/tcp on 172.16.14.40
+Discovered open port 3389/tcp on 172.16.14.40
+Discovered open port 135/tcp on 172.16.14.40
+Discovered open port 1026/tcp on 172.16.14.40
+.
+.
+.
+10.14.16.172.in-addr.arpa	name = rootca.mayerbrot.local.
+40.14.16.172.in-addr.arpa	name = datei.mayerbrot.local.
+.
+.
+.
+\end{lstlisting}
+\caption{Script für dynamischen Portscan: nmap.sh}
+\end{figure}
+
+\subsubsection{Zugriff auf den Dateiserver}
+
+Aus den offenen Ports des Rechners \lstinline{datei.mayerbrot.local} kann man
+schließen, dass es sich um einen Windows Server handelt.. Es wurde mit
+\\172.16.14.40 versucht, sich die Freigaben anzuzeigen. Es war zu diesem
+Zeitpunkt nur public zu sehen. Auf das public Verzeichnis kann von einem Linux
+oder Free-BSD Rechner einfach zugegriffen werden. Dazu wird die Freigabe
+``gemountet'' und die Dateien können mit regulären UNIX Befehlen angesehen und
+kopiert werden:
+
+\begin{lstlisting}
+\% mkdir /mnt/cifs
+\% sudo mount -t cifs //172.16.14.40/public /mnt/cifs
+\% cd /mnt/cifs
+\% ls
+Rezept1NR.txt  testdatei.txt
+\% cp -v Rezept1NR.txt /home/xxx
+`Rezept1NR.txt' -> `/home/xxx/Rezept1NR.txt'
+\end{lstlisting}
+
+\subsubsection{Metasploit}
+
+Das Metasploit-Projekt ist ein freies Open-Source-Projekt zur
+Computersicherheit, das Informationen über Sicherheitslücken bietet und bei
+Penetrationstests sowie der Entwicklung von IDS-Signaturen(? @TODO) eingesetzt
+werden kann. Das bekannteste Teilprojekt ist das Metasploit Framework, ein
+Werkzeug zur Entwicklung und Ausführung von Exploits gegen verteilte
+Zielrechner. Andere wichtige Teilprojekte sind das Shellcode-Archiv und
+Forschung im Bereich der IT-Sicherheit.
+
+\begin{lstlisting}
+
+\end{lstlisting}

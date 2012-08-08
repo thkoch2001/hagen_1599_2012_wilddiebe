@@ -1,10 +1,10 @@
 \subsection{Webserver hacken}
 
-Wir wissen bereits, dass der Webserver von \Mayerbrot{} unter der Adresse 172.16.14.30 zu erreichen ist\footnote{vgl. den Portscan aus \protect{\cref{fig:nmap}}}. Greifen wir über \Firefox{} auf diese Adresse zu, dann werden wir auf \url{https://172.16.14.30} umgeleitet. Die Kommunikation erfolgt also über eine gesicherte Verbindung. \Firefox{} kann das Zertifikat nicht überprüfen, und gibt eine entsprechende Warnung aus. Wenn wir diese ignorieren, gelangen wir zur Homepage von \Mayerbrot{} (siehe \bildref{WebServerHacken2}).
+Wir wissen bereits, dass der Webserver von \Mayerbrot{} unter der Adresse 172.16.14.30 zu erreichen ist\footnote{vgl. den Portscan aus \protect{\cref{fig:nmap}}}. Greifen wir Ã¼ber \Firefox{} auf diese Adresse zu, dann werden wir auf \url{https://172.16.14.30} umgeleitet. Die Kommunikation erfolgt also Ã¼ber eine gesicherte Verbindung. \Firefox{} kann das Zertifikat nicht Ã¼berprÃ¼fen, und gibt eine entsprechende Warnung aus. Wenn wir diese ignorieren, gelangen wir zur Homepage von \Mayerbrot{} (siehe \bildref{WebServerHacken2}).
 
 \bilddatei{WebServerHacken2}{Homepage von \Mayerbrot{}}{0.7}
 
-Das erste Rezept ist nicht weiter geschützt. Über den entsprechenden Link unter \textsc{Neuigkeiten} kann das verschlüsselte Rezept heruntergeladen werden\footnote{Die Entschlüsselung wird in \cref{RezeptDreiEntschlüsseln} gezeigt}.
+Das erste Rezept ist nicht weiter geschÃ¼tzt. Ãœber den entsprechenden Link unter \textsc{Neuigkeiten} kann das verschlÃ¼sselte Rezept heruntergeladen werden\footnote{Die EntschlÃ¼sselung wird in \cref{RezeptDreiEntschlÃ¼sseln} gezeigt}.
 
 Auf der Homepage befindet sich auch ein \emph{Sicherheitsbereich}. Ein Zugriff darauf wird mit einer Fehlermeldung quittiert (siehe \bildref{WebServerHacken4}). Hier ist wohl das zweite Rezept zu finden. Wenn wir ins Blaue hinein raten und \url{https://172.16.14.30/private/rezept.txt} eintippen, kommen wir auch nicht weiter.
 
@@ -12,7 +12,7 @@ Auf der Homepage befindet sich auch ein \emph{Sicherheitsbereich}. Ein Zugriff d
 
 \subsubsection{Metasploit}
 
-Nachdem \Metasploit{} bereits beim Dateiserver gute Dienste geleistet hat, versuchen wir den Webserver auf ähnliche Weise zu attackieren. Durch den vorausgegangenen Portscan (siehe \cref{fig:nmap}) haben wir schon eine Liste der offenen Ports erhalten (siehe \tableref{WebserverPortScan}).
+Nachdem \Metasploit{} bereits beim Dateiserver gute Dienste geleistet hat, versuchen wir den Webserver auf Ã¤hnliche Weise zu attackieren. Durch den vorausgegangenen Portscan (siehe \cref{fig:nmap}) haben wir schon eine Liste der offenen Ports erhalten (siehe \tableref{WebserverPortScan}).
 
 \starttable{WebserverPortScan}{Offene Ports des Webservers}{llll}
 \toprule
@@ -25,22 +25,22 @@ Port & name & proto & info\\
 \bottomrule
 \stoptable{}
 
-Um eventuelle Schwachstellen zu entdecken starten wir \Armitage{}. Anschließend fügen wir den Host 172.16.14.30 hinzu und führen einen Scan aus. Wenn dieser abgeschlossen ist, können wir über \emph{\glqq{}Find Attacks\grqq{}} Angriffspunkte suchen.
+Um eventuelle Schwachstellen zu entdecken starten wir \Armitage{}. AnschlieÃŸend fÃ¼gen wir den Host 172.16.14.30 hinzu und fÃ¼hren einen Scan aus. Wenn dieser abgeschlossen ist, kÃ¶nnen wir Ã¼ber \emph{\glqq{}Find Attacks\grqq{}} Angriffspunkte suchen.
 
-\Armitage{} findet Exploits in den Kategorien \texttt{http}, \texttt{realserver}, \texttt{webapp} und \texttt{wyse}. Mit \emph{\glqq{}Check Exploits\grqq{}} filtern wir erfolgsversprechende Exploits heraus. Jetzt bleibt nur noch \texttt{unix/webapp/basilic\_diff\_exec} übrig (vgl. \bildref{WebDatei1}). Wenden wir diesen Exploit an, führt das aber irgendwie nicht zum gewünschten Erfolg.
+\Armitage{} findet Exploits in den Kategorien \texttt{http}, \texttt{realserver}, \texttt{webapp} und \texttt{wyse}. Mit \emph{\glqq{}Check Exploits\grqq{}} filtern wir erfolgsversprechende Exploits heraus. Jetzt bleibt nur noch \texttt{unix/webapp/basilic\_diff\_exec} Ã¼brig (vgl. \bildref{WebDatei1}). Wenden wir diesen Exploit an, fÃ¼hrt das aber irgendwie nicht zum gewÃ¼nschten Erfolg.
 
 \bilddatei{WebDatei1}{Webserver Exploit}{0.7}
 
-In \Metasploit{} wird jedem Exploit ein Rang zugeordnet. Damit wird der Wirkungsgrad und Einfachheit des Exploits bewertet. Der Rang reicht von \emph{Poor} bis \emph{Excellent}. Wir könnten jetzt unsere Ansprüche herunterschrauben und auch schlechtere Exploits zulassen. Vielleicht sollten wir unser Suche aber auf andere Tools ausweiten.
+In \Metasploit{} wird jedem Exploit ein Rang zugeordnet. Damit wird der Wirkungsgrad und Einfachheit des Exploits bewertet. Der Rang reicht von \emph{Poor} bis \emph{Excellent}. Wir kÃ¶nnten jetzt unsere AnsprÃ¼che herunterschrauben und auch schlechtere Exploits zulassen. Vielleicht sollten wir unser Suche aber auf andere Tools ausweiten.
 
 
 \subsubsection{Webscanner}
 
-Der Schwerpunkt von \Metasploit{} liegt nicht bei der Schwachstellen-Analyse von Webapplikationen. Dafür existieren spezielle Webserver-Scanner, deren Ergebnisse wiederum in \Metasploit{} importiert werden können. Beim Scannen von Webapplikationen liefern kommerzielle Produkte wie \emph{Appscan}, \emph{Webinspect}, \emph{Acunetix} oder \emph{Burp} gute Ergebnisse. Frei zugänglich sind dagegen \emph{Nikto}, \emph{W3AF}, \emph{Watobo}, \emph{Wapiti} oder \emph{Nexpose Community Edition} (vgl. \cite[S.~281]{metahandbuch}). Wir beginnen mit Nikto.
+Der Schwerpunkt von \Metasploit{} liegt nicht bei der Schwachstellen-Analyse von Webapplikationen. DafÃ¼r existieren spezielle Webserver-Scanner, deren Ergebnisse wiederum in \Metasploit{} importiert werden kÃ¶nnen. Beim Scannen von Webapplikationen liefern kommerzielle Produkte wie \emph{Appscan}, \emph{Webinspect}, \emph{Acunetix} oder \emph{Burp} gute Ergebnisse. Frei zugÃ¤nglich sind dagegen \emph{Nikto}, \emph{W3AF}, \emph{Watobo}, \emph{Wapiti} oder \emph{Nexpose Community Edition} (vgl. \cite[S.~281]{metahandbuch}). Wir beginnen mit Nikto.
 
 \paragraph{Nikto}
 
-Bei Nikto handelt es sich um einen Webserver-Scanner, der auf den gängigen Betriebssystemen (\emph{Windows}, \emph{Mac OSX}, \emph{Linux} und \emph{UNIX}) verfügbar ist. Nikto kann dabei über 6400 Probleme in CGI- und PHP-Dateien erkennen. Außerdem wird nach veralteten Versionen oder bekannten Problemen spezieller Version gesucht (vgl. \cite{Nikto}).
+Bei Nikto handelt es sich um einen Webserver-Scanner, der auf den gÃ¤ngigen Betriebssystemen (\emph{Windows}, \emph{Mac OSX}, \emph{Linux} und \emph{UNIX}) verfÃ¼gbar ist. Nikto kann dabei Ã¼ber 6400 Probleme in CGI- und PHP-Dateien erkennen. AuÃŸerdem wird nach veralteten Versionen oder bekannten Problemen spezieller Version gesucht (vgl. \cite{Nikto}).
 
 Gestartet wird die Analyse mit dem Befehl \texttt{nikto -h 172.16.14.30}. Als Ergebnis werden folgende Warnungen erzeugt:
 
@@ -56,64 +56,64 @@ OSVDB\footnotemark & Bemerkung\\
 2799 & DailyDose 1.1 is vulnerable to a directory traversal attack in the 'list' parameter\\
 \bottomrule
 \stoptable{}
-\footnotetext{Abkürzung für \emph{Open Source Vulnerability Database} (siehe \url{http://www.osvdb.org})}
+\footnotetext{AbkÃ¼rzung fÃ¼r \emph{Open Source Vulnerability Database} (siehe \url{http://www.osvdb.org})}
 
-Auf der Webseite \url{http://www.metasploit.com/modules/} können wir prüfen, ob \Metasploit{} entsprechende Exploits zur Verfügung stellt. Aber für keine OSVDB-Nummer gibt es Treffer.
+Auf der Webseite \url{http://www.metasploit.com/modules/} kÃ¶nnen wir prÃ¼fen, ob \Metasploit{} entsprechende Exploits zur VerfÃ¼gung stellt. Aber fÃ¼r keine OSVDB-Nummer gibt es Treffer.
     
 \paragraph{W3AF}
 
-W3AF steht für \emph{Web Application Attack and Audit Framework}. Dabei handelt es sich um ein Open-Source-Projekt, das bei
+W3AF steht fÃ¼r \emph{Web Application Attack and Audit Framework}. Dabei handelt es sich um ein Open-Source-Projekt, das bei
 \emph{SourceForge} gehostet wird. 
 
-Über Plugins wird eine erweiterbare Architektur bereitgestellt. Im Gegensatz zu Nikto beschränkt sich W3AF dabei nicht nur auf die Schwachstellen-Analyse, sondern bietet auch entsprechende Exploits an (vgl. \cite{W3AF}). W3AF kann dabei bequem über eine graphische Oberfläche bedient werden. 
+Ãœber Plugins wird eine erweiterbare Architektur bereitgestellt. Im Gegensatz zu Nikto beschrÃ¤nkt sich W3AF dabei nicht nur auf die Schwachstellen-Analyse, sondern bietet auch entsprechende Exploits an (vgl. \cite{W3AF}). W3AF kann dabei bequem Ã¼ber eine graphische OberflÃ¤che bedient werden. 
 
-Um den Webserver von \Mayerbrot{} zu scannen geben wir als \emph{Target} die Adresse \url{https://172.16.14.30} ein. Anschließend wählen wir die Plugins \emph{Audit} und \emph{Discovery} (siehe \bildref{W3AF1}). Mit \emph{Discovery} veranlassen wir die Schwachstellen-Analyse und mit \emph{Audit} suchen wir entsprechende Exploits. Danach starten wir den Scan-Vorgang.
+Um den Webserver von \Mayerbrot{} zu scannen geben wir als \emph{Target} die Adresse \url{https://172.16.14.30} ein. AnschlieÃŸend wÃ¤hlen wir die Plugins \emph{Audit} und \emph{Discovery} (siehe \bildref{W3AF1}). Mit \emph{Discovery} veranlassen wir die Schwachstellen-Analyse und mit \emph{Audit} suchen wir entsprechende Exploits. Danach starten wir den Scan-Vorgang.
 
 \bilddatei{W3AF1}{W3AF Scan config}{0.6}
 
-Für den Analyse wird ein Proxy mit dem Namen \emph{spiderMan} gestartet, der über \texttt{127.0.0.1:44444} zu erreichen wird. Wir konfigurieren \Firefox{} so, dass die Kommunikation über diesen Proxy abläuft. Anschließend können wir die Homepage von \Mayerbrot{} aufgerufen und durch die Anwendung navigieren. Sind wir damit fertig, dann geben wir die Adresse \url{http://127.7.7.7/spiderMan?terminate} ein.
+FÃ¼r den Analyse wird ein Proxy mit dem Namen \emph{spiderMan} gestartet, der Ã¼ber \texttt{127.0.0.1:44444} zu erreichen wird. Wir konfigurieren \Firefox{} so, dass die Kommunikation Ã¼ber diesen Proxy ablÃ¤uft. AnschlieÃŸend kÃ¶nnen wir die Homepage von \Mayerbrot{} aufgerufen und durch die Anwendung navigieren. Sind wir damit fertig, dann geben wir die Adresse \url{http://127.7.7.7/spiderMan?terminate} ein.
 
-Die Prüfung hat einige Schwachstellen entdeckt, aber keine führt uns direkt zum geheimen Rezept.
+Die PrÃ¼fung hat einige Schwachstellen entdeckt, aber keine fÃ¼hrt uns direkt zum geheimen Rezept.
 
 \bilddatei{W3AF3}{W3AF Results}{0.6}
 
-\subsubsection{Angriff über den Dateiserver}
+\subsubsection{Angriff Ã¼ber den Dateiserver}
 
-Unsere bisherigen Bemühungen waren nicht von Erfolg gekrönt. Natürlich können wir der Reihe nach alle Webserver-Scanner ausprobieren, in der Hoffnung, dass einer etwas Brauchbares liefert. Vielleicht sollten wir aber neue Strategien ins Auge fassen.
+Unsere bisherigen BemÃ¼hungen waren nicht von Erfolg gekrÃ¶nt. NatÃ¼rlich kÃ¶nnen wir der Reihe nach alle Webserver-Scanner ausprobieren, in der Hoffnung, dass einer etwas Brauchbares liefert. Vielleicht sollten wir aber neue Strategien ins Auge fassen.
 
-Wenn ein Einbrecher über das Schlafzimmerfenster in eine Wohnung eingebrochen ist, wird er von dort aus die anderen Zimmer durchsuchen. Den Einbruch ins Firmennetz von \Mayerbrot{} ist uns bereits über den Dateiserver gelungen. Wir sollten uns fragen, ob wir diese Schwachstelle weiter ausnutzen können. Zumindest dürfte der Dateiserver einen gewissen Vertrauensvorsprung gegenüber firmenfremde Computer haben. 
+Wenn ein Einbrecher Ã¼ber das Schlafzimmerfenster in eine Wohnung eingebrochen ist, wird er von dort aus die anderen Zimmer durchsuchen. Den Einbruch ins Firmennetz von \Mayerbrot{} ist uns bereits Ã¼ber den Dateiserver gelungen. Wir sollten uns fragen, ob wir diese Schwachstelle weiter ausnutzen kÃ¶nnen. Zumindest dÃ¼rfte der Dateiserver einen gewissen Vertrauensvorsprung gegenÃ¼ber firmenfremde Computer haben. 
 
-Um dies zu testen, übernehmen wir erneut den Dateiserver\footnote{dazu gehen wir wie in \cref{sec:dateiserverhacken} vor}. Maximale Kontrolle über den Dateiserver erhalten werden, indem wir eine VNC-Sitzung aufbauen. Dazu gehen wir über \emph{Meterpreter 1} zu \emph{Interact} und dann zum Eintrag \emph{Desktop (VNC)}. Anschließend steht der VNC-Dienst über \url{127.0.0.1:5934} zur Verfügung. Wir tragen im VNC-Viewer von \Metasploit{} die angegebene Adresse ein, und erhalten Zugang zum Dateiserver (siehe \bildref{WebDatei12}).
+Um dies zu testen, Ã¼bernehmen wir erneut den Dateiserver\footnote{dazu gehen wir wie in \cref{sec:dateiserverhacken} vor}. Maximale Kontrolle Ã¼ber den Dateiserver erhalten werden, indem wir eine VNC-Sitzung aufbauen. Dazu gehen wir Ã¼ber \emph{Meterpreter 1} zu \emph{Interact} und dann zum Eintrag \emph{Desktop (VNC)}. AnschlieÃŸend steht der VNC-Dienst Ã¼ber \url{127.0.0.1:5934} zur VerfÃ¼gung. Wir tragen im VNC-Viewer von \Metasploit{} die angegebene Adresse ein, und erhalten Zugang zum Dateiserver (siehe \bildref{WebDatei12}).
 
 \bilddatei{WebDatei12}{VNC-Sitzung mit Dateiserver}{0.6}
 
 Auf dem Desktop ist das Icon von \emph{OpenVPN GUI} zu sehen. Aus unseren Erfahrungen mit \emph{OpenVPN GUI}\footnote{vgl. \cref{sec:openvpn}} wissen wir, dass im Konfigurationsverzeichnis auch das Zertifikat des Dateiservers zu finden. Es kann nicht schaden, das komplette Konfigurationsverzeichnis auf unseren Rechner zu kopieren.
 
-Anschließend kümmern wir uns um das geheime Rezept. Dazu versuchen wir die Homepage des Webservers über den Internet-Explorer zu erreichen. Leider erscheint eine Fehlermeldung, dass die Datei nicht gefunden werden kann. Die Seite von Google kann aber aufgerufen werden. Ein Ping auf den Webserver klappt auch. Weitere Untersuchungen waren aber nicht möglich, da wir plötzlich nicht mehr ungestört waren. Der Nachteil einer VNC-Sitzung ist, dass man nicht unbeobachtet agieren kann. Als der Administrator sich auf System aufschaltet, trennen wir daher die Verbindung. Nicht einmal die notwendige Aufräumarbeiten, um die Spuren des Einbruchs zu beseitigen, konnten wir durchführen.
+AnschlieÃŸend kÃ¼mmern wir uns um das geheime Rezept. Dazu versuchen wir die Homepage des Webservers Ã¼ber den Internet-Explorer zu erreichen. Leider erscheint eine Fehlermeldung, dass die Datei nicht gefunden werden kann. Die Seite von Google kann aber aufgerufen werden. Ein Ping auf den Webserver klappt auch. Weitere Untersuchungen waren aber nicht mÃ¶glich, da wir plÃ¶tzlich nicht mehr ungestÃ¶rt waren. Der Nachteil einer VNC-Sitzung ist, dass man nicht unbeobachtet agieren kann. Als der Administrator sich auf System aufschaltet, trennen wir daher die Verbindung. Nicht einmal die notwendige AufrÃ¤umarbeiten, um die Spuren des Einbruchs zu beseitigen, konnten wir durchfÃ¼hren.
 
 \subsubsection{Zugriff mit dem Zertifikat}
 
-Wie bereits erwähnt, haben wird vom Dateiservers die kompletten OpenVPN-Konfigurationsdateien heruntergeladen (vgl. \bildref{Dateiserverdateien}). Darunter befindet sich auch das Zertifikat des Dateiservers. Bei einem Zertifikat handelt sich um einen digitalen Ausweis. Verwenden wird diesen Ausweis gegenüber dem Webserver, dann muss dieser davon ausgehen, dass er es mit dem Dateiserver zu tun hat. Auf diese Weise könnten wir unter dem Namen des Dateiservers ungestört weitere Tests durchführen. Zunächst wollen prüfen, ob wir damit auf den geschützten Bereich des Webservers zugreifen können. 
+Wie bereits erwÃ¤hnt, haben wird vom Dateiservers die kompletten OpenVPN-Konfigurationsdateien heruntergeladen (vgl. \bildref{Dateiserverdateien}). Darunter befindet sich auch das Zertifikat des Dateiservers. Bei einem Zertifikat handelt sich um einen digitalen Ausweis. Verwenden wird diesen Ausweis gegenÃ¼ber dem Webserver, dann muss dieser davon ausgehen, dass er es mit dem Dateiserver zu tun hat. Auf diese Weise kÃ¶nnten wir unter dem Namen des Dateiservers ungestÃ¶rt weitere Tests durchfÃ¼hren. ZunÃ¤chst wollen prÃ¼fen, ob wir damit auf den geschÃ¼tzten Bereich des Webservers zugreifen kÃ¶nnen. 
 
 \bilddatei{Dateiserverdateien}{OpenVPN-Konfigurationsdateien des Dateiservers}{0.6}
 
-Um ein Zertifikat in \Firefox{} zu importieren muss es als PFX-Datei vorliegen. Wir haben aber nur eine crt-Datei und den privaten Schlüssel. Allerdings können wir daraus über folgendes Kommando eine PFX-Datei erzeugen:
+Um ein Zertifikat in \Firefox{} zu importieren muss es als PFX-Datei vorliegen. Wir haben aber nur eine crt-Datei und den privaten SchlÃ¼ssel. Allerdings kÃ¶nnen wir daraus Ã¼ber folgendes Kommando eine PFX-Datei erzeugen:
 
 \begin{MetasploitCode}{lst:openssl}{openssl}
-openssl pkcs12 –inkey privkey.pem –in datei.mayerbrot.local.vpn.crt –export –out mayerdatei.pfx
+openssl pkcs12 Â–inkey privkey.pem Â–in datei.mayerbrot.local.vpn.crt Â–export Â–out mayerdatei.pfx
 \end{MetasploitCode}
 
-Bei der Frage nach dem Schlüssel wählen wir 123 und erhalten die Datei \texttt{mayerdatei.pfx}. Dieser Schlüssel wird später benötigt, wenn wir das Zertifikat in den Webbrowser importieren wollen.
+Bei der Frage nach dem SchlÃ¼ssel wÃ¤hlen wir 123 und erhalten die Datei \texttt{mayerdatei.pfx}. Dieser SchlÃ¼ssel wird spÃ¤ter benÃ¶tigt, wenn wir das Zertifikat in den Webbrowser importieren wollen.
 
 Das machen wir auch sogleich. Dazu starten wir \Firefox{} und rufen den Zertifikatsmanager auf. Hier gehen wird zur Registerkarte \glqq{}Ihre Zertifikate\grqq{} und importieren die Datei \texttt{mayerdatei.pfx}. Als Ergebnis erhalten wir das Fenster in \bildref{WebServerHacken8}.
 
 \bilddatei{WebServerHacken8}{Importiertes Zertifikat}{0.6}
 
-Wenn wir jetzt auf die Homepage des Webservers zugreifen wird zunächst nach dem Zertifikat gefragt (vgl. \bildref{WebServerHacken9}). Hier wählen wir das Zertifikat des Dateiservers.
+Wenn wir jetzt auf die Homepage des Webservers zugreifen wird zunÃ¤chst nach dem Zertifikat gefragt (vgl. \bildref{WebServerHacken9}). Hier wÃ¤hlen wir das Zertifikat des Dateiservers.
 
 \bilddatei{WebServerHacken9}{Zertifizierungsanfrage}{0.6}
 
-Greifen wir jetzt auf den Sicherheitsbereich zu, dann erscheint die Meldung: \glqq{}Dieser Text ist nur mit gültigem Client-Zertifikat abrufbar\grqq{}. So schnell geben wir aber nicht auf und tippen \url{https://172.16.14.30/private/rezept.txt} ein. Jetzt erhalten wird das verschlüsselte Rezept aus dem Sicherheitsbereich\footnote{Die Entschlüsselung des Rezepts wird in \cref{RezeptVierEntschlüsseln} gezeigt} (vgl. \bildref{WebServerHacken11}). Damit sehen wir, dass es durchaus reicht, ein Rechner zu hacken, um Zugriff auf weitere Rechner im Netz zu erhalten.
+Greifen wir jetzt auf den Sicherheitsbereich zu, dann erscheint die Meldung: \glqq{}Dieser Text ist nur mit gÃ¼ltigem Client-Zertifikat abrufbar\grqq{}. So schnell geben wir aber nicht auf und tippen \url{https://172.16.14.30/private/rezept.txt} ein. Jetzt erhalten wird das verschlÃ¼sselte Rezept aus dem Sicherheitsbereich\footnote{Die EntschlÃ¼sselung des Rezepts wird in \cref{RezeptVierEntschlÃ¼sseln} gezeigt} (vgl. \bildref{WebServerHacken11}). Damit sehen wir, dass es durchaus reicht, ein Rechner zu hacken, um Zugriff auf weitere Rechner im Netz zu erhalten.
 
 \bilddatei{WebServerHacken11}{Zweites Rezept des Webservers}{0.6}
 
