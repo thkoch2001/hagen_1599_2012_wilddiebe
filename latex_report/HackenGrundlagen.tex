@@ -1,32 +1,95 @@
 \section{Hacken}
 \subsection{Grundlagen}
 
-Es lassen sich zwei grundlegende Formen des Hackens unterscheiden -- Social Engineering und direktes, klassisch-technisches Hacken. Die beiden Formen können aber natürlich auch in Kombination angewendet werden.
+Es lassen sich zwei grundlegende Formen des Hackens unterscheiden -- Social
+Engineering und direktes, klassisch-technisches Hacken. Die beiden Formen können
+aber natürlich auch in Kombination angewendet werden.
 
 \subsubsection{Social Engineering}
 
-Social Engineering bedeutet, dass der Angreifer durch eine erfundene Geschichte einen berechtigten Nutzer dazu bringt, etwas zu tun, das dem Angreifer hilft die Sicherheitsbarrieren des Systems zu überwinden \cite[S.~77]{Pip00}. Am gefährlichsten ist es, wenn Administratoren einer Social-Engineering-Attacke erliegen \cite[S.~94]{Rae01}. Die Kontaktaufnahme kann persönlich, über E-Mail oder über Telefon erfolgen \cite[S.~119]{Sta95}.
+Social Engineering bedeutet, dass der Angreifer durch eine erfundene Geschichte
+einen berechtigten Nutzer dazu bringt, etwas zu tun, das dem Angreifer hilft die
+Sicherheitsbarrieren des Systems zu überwinden \cite[S.~77]{Pip00}. Am
+gefährlichsten ist es, wenn Administratoren einer Social-Engineering-Attacke
+erliegen \cite[S.~94]{Rae01}. Die Kontaktaufnahme kann persönlich, über E-Mail
+oder über Telefon erfolgen \cite[S.~119]{Sta95}.
 
-Als Beispiel führen Köhntopp et al. an: Der Angreifer ruft einen Mitarbeiter an und gibt sich dabei als Kollege aus einer anderen Abteilung oder als Systemadministrator aus. Dann bittet er seinen Gesprächspartner um ein Passwort oder um sonstige Angaben, angeblich damit er noch schnell eine dringende Arbeit erledigen oder einen Systemfehler beheben kann \cite[S.~15]{KSG98}. So gelangt der Angreifer direkt an die nötigen Zugriffskennungen oder er nutzt die erhaltenen Informationen für seinen nächsten Schritt, etwa um sich das Vertrauen des nachfolgenden Opfers zu erschleichen und von diesem weitergehendere Auskünfte einzuholen \cite[S.~260]{ScB01}.
+Als Beispiel führen Köhntopp et al. an: Der Angreifer ruft einen Mitarbeiter an
+und gibt sich dabei als Kollege aus einer anderen Abteilung oder als
+Systemadministrator aus. Dann bittet er seinen Gesprächspartner um ein Passwort
+oder um sonstige Angaben, angeblich damit er noch schnell eine dringende Arbeit
+erledigen oder einen Systemfehler beheben kann \cite[S.~15]{KSG98}. So gelangt
+der Angreifer direkt an die nötigen Zugriffskennungen oder er nutzt die
+erhaltenen Informationen für seinen nächsten Schritt, etwa um sich das Vertrauen
+des nachfolgenden Opfers zu erschleichen und von diesem weitergehendere
+Auskünfte einzuholen \cite[S.~260]{ScB01}.
 
-Nimmt ein Angreifer per E-Mail Kontakt auf, kann er Janowicz zufolge \zB{} mittels E-Mail-Spoofing Nachrichten mit einer beliebigen Absenderadresse versehen. Falls der Betrüger in einer derartigen Mail einen anderen Antwortpfad spezifiziert hat und der Empfänger auf den Antwort-Button klickt, erreicht seine Mitteilung zudem nicht den vorgeblichen Absender, sondern geht an die vom Angreifer gewählte Adresse. Selbst ganz ohne technische Tricks kann jemand versuchen, den Empfänger einer E-Mail über deren Herkunft zu täuschen, indem er bei einem Freemail-Anbieter einen Account mit einer irreführenden Adresse einrichtet, die den Namen einer vertrauenswürdigen Person oder Organisation enthält \cite[S.~109--110, 123]{Jan02}.
+Nimmt ein Angreifer per E-Mail Kontakt auf, kann er Janowicz zufolge \zB{}
+mittels E-Mail-Spoofing Nachrichten mit einer beliebigen Absenderadresse
+versehen. Falls der Betrüger in einer derartigen Mail einen anderen Antwortpfad
+spezifiziert hat und der Empfänger auf den Antwort-Button klickt, erreicht seine
+Mitteilung zudem nicht den vorgeblichen Absender, sondern geht an die vom
+Angreifer gewählte Adresse. Selbst ganz ohne technische Tricks kann jemand
+versuchen, den Empfänger einer E-Mail über deren Herkunft zu täuschen, indem er
+bei einem Freemail-Anbieter einen Account mit einer irreführenden Adresse
+einrichtet, die den Namen einer vertrauenswürdigen Person oder Organisation
+enthält \cite[S.~109--110, 123]{Jan02}.
 
 \subsubsection{Direktes, klassisch-technisches Hacken}
 
-Unter direktem, klassisch-technischem Hacken werden \va{} netzwerkbasierte Angriffe gefasst, die von Personen zur Erlangung von Zugriffsrechten durchgeführt werden und dabei als Ansatzpunkte die Gefährdungen nutzen, die sich aus der Internetanbindung des Unternehmens bzw. der Verwendung eines Intranets ergeben \cite[S. 363]{Sta01}. Der Angreifer agiert entweder über das Internet oder befindet sich von vornherein im internen Netzwerk.
+Unter direktem, klassisch-technischem Hacken werden \va{} netzwerkbasierte
+Angriffe gefasst, die von Personen zur Erlangung von Zugriffsrechten
+durchgeführt werden und dabei als Ansatzpunkte die Gefährdungen nutzen, die sich
+aus der Internetanbindung des Unternehmens bzw. der Verwendung eines Intranets
+ergeben \cite[S. 363]{Sta01}. Der Angreifer agiert entweder über das Internet
+oder befindet sich von vornherein im internen Netzwerk.
 
-Üblicherweise sammelt ein Hacker, wie Fuhrberg et al. darlegen, zunächst Informationen über das System und sucht nach Schwachstellen. Beispielsweise kann der Hacker versuchen, mit einem Portscan die offenen Ports des Zielcomputers zu erkennen und dann die jeweils dahinterliegenden Programme bzw. Programmversionen festzustellen. Viele Dienste verraten standardmäßig Informationen über sich oder das zugrundeliegende Betriebssystem, etwa in ihren Login- oder Fehlermeldungen \cite[S.~58-59]{FHW01}. Manche interessante Angaben sind unmittelbar öffentlich verfügbar, etwa auf der Website des Unternehmens. Eventuell ist auch der Name-Server der Firma so eingerichtet, dass er seine Daten jedermann preisgibt und dadurch Hinweise auf die Struktur des internen Netzes liefert \cite[S.~222]{Pip00}. 
+Üblicherweise sammelt ein Hacker, wie Fuhrberg et al. darlegen, zunächst
+Informationen über das System und sucht nach Schwachstellen. Beispielsweise kann
+der Hacker versuchen, mit einem Portscan die offenen Ports des Zielcomputers zu
+erkennen und dann die jeweils dahinterliegenden Programme bzw. Programmversionen
+festzustellen. Viele Dienste verraten standardmäßig Informationen über sich oder
+das zugrundeliegende Betriebssystem, etwa in ihren Login- oder Fehlermeldungen
+\cite[S.~58-59]{FHW01}. Manche interessante Angaben sind unmittelbar öffentlich
+verfügbar, etwa auf der Website des Unternehmens. Eventuell ist auch der
+Name-Server der Firma so eingerichtet, dass er seine Daten jedermann preisgibt
+und dadurch Hinweise auf die Struktur des internen Netzes liefert
+\cite[S.~222]{Pip00}.
 
-Anschließend nutzt der Hacker ihm bekannte Schwachpunkte des jeweiligen Systems aus \cite[S.~97]{Poh01}. Die Schwachstellen, die Hacker ausnutzen können, entstehen durch Konzeptions-, Programmier- oder Konfigurationsfehler \cite[S. 48]{FHW01}. Das Sammeln von Informationen und Ausnutzen von Schwachstellen wird ggf. mehrmals wiederholt, bis der Eindringling alle Schutzmechanismen überwunden und sein endgültiges Ziel erreicht hat \cite[S.~98--99]{Rae01}.
+Anschließend nutzt der Hacker ihm bekannte Schwachpunkte des jeweiligen Systems
+aus \cite[S.~97]{Poh01}. Die Schwachstellen, die Hacker ausnutzen können,
+entstehen durch Konzeptions-, Programmier- oder Konfigurationsfehler
+\cite[S. 48]{FHW01}. Das Sammeln von Informationen und Ausnutzen von
+Schwachstellen wird ggf. mehrmals wiederholt, bis der Eindringling alle
+Schutzmechanismen überwunden und sein endgültiges Ziel erreicht hat
+\cite[S.~98--99]{Rae01}.
 
-Der Hacker kann den gesamten Prozess manuell durchführen oder ihn mit Hilfe von oftmals frei im Internet erhältlichen Tools teilweise oder ganz automatisieren \cite[S. 52-53]{SSF02}. Auch eine sehr große Anzahl an sogenannten \glqq{}Script Kiddies\grqq{}, technischen Laien, verwendet die automatisierten Tools und führt damit gefährliche Angriffe durch 
-\cite[S.~82]{CoM99}.
+Der Hacker kann den gesamten Prozess manuell durchführen oder ihn mit Hilfe von
+oftmals frei im Internet erhältlichen Tools teilweise oder ganz automatisieren
+\cite[S. 52-53]{SSF02}. Auch eine sehr große Anzahl an sogenannten \glqq{}Script
+Kiddies\grqq{}, technischen Laien, verwendet die automatisierten Tools und führt
+damit gefährliche Angriffe durch \cite[S.~82]{CoM99}.
 
-Cheswick/Matzer erläutern, dass nach einem erfolgreichen Einbruch der Hacker wahrscheinlich versuchen wird, die elektronischen Spuren, die er hinterlassen hat, zu verwischen und eine Hintertür zu installieren, damit er später leichter zurückkehren kann. Vom eroberten Computer aus kann der Eindringling weitere Server im Netzwerk angreifen und unter seine Kontrolle bringen \cite[S.~182]{ChB99}.  Dabei nutzt er das transitive Vertrauen aus, \dH{} er verwendet die erweiterten Zugriffsrechte, über die der bereits eingenommene Rechner bei der nächsten Zielmaschine verfügt \cite[S.~14]{KSG98}. 
+Cheswick/Matzer erläutern, dass nach einem erfolgreichen Einbruch der Hacker
+wahrscheinlich versuchen wird, die elektronischen Spuren, die er hinterlassen
+hat, zu verwischen und eine Hintertür zu installieren, damit er später leichter
+zurückkehren kann. Vom eroberten Computer aus kann der Eindringling weitere
+Server im Netzwerk angreifen und unter seine Kontrolle bringen
+\cite[S.~182]{ChB99}.  Dabei nutzt er das transitive Vertrauen aus, \dH{} er
+verwendet die erweiterten Zugriffsrechte, über die der bereits eingenommene
+Rechner bei der nächsten Zielmaschine verfügt \cite[S.~14]{KSG98}.
 
-Im schlimmsten Fall erreicht der Hacker volle Kontrolle über das System und kann sämtliche Informationen einsehen, ändern oder löschen, die technisch gesehen über das Netzwerk erreichbar bzw. manipulierbar sind. Der Angreifer ist \zB{} auch in der Lage, die unterwanderten Server als Sprungbrett für Angriffe auf andere Firmen im Internet zu verwenden, wodurch aus Sicht des Opfers das zuerst infiltrierte Unternehmen als Urheber der Attacken erscheint \cite[S.~364--365]{Sta01}. Oder der Hacker legt laut Stiefenhofer auf den Rechnern Dateien mit illegalen Inhalten ab und bietet sie auf Kosten des Unternehmens zum Download an. Das Bekanntwerden eines erfolgreichen Einbruchs kann zu einem beachtlichen Image- und Vertrauensverlust führen \cite[S.~38]{ScO97}. 
-
-
+Im schlimmsten Fall erreicht der Hacker volle Kontrolle über das System und kann
+sämtliche Informationen einsehen, ändern oder löschen, die technisch gesehen
+über das Netzwerk erreichbar bzw. manipulierbar sind. Der Angreifer ist \zB{}
+auch in der Lage, die unterwanderten Server als Sprungbrett für Angriffe auf
+andere Firmen im Internet zu verwenden, wodurch aus Sicht des Opfers das zuerst
+infiltrierte Unternehmen als Urheber der Attacken erscheint
+\cite[S.~364--365]{Sta01}. Oder der Hacker legt laut Stiefenhofer auf den
+Rechnern Dateien mit illegalen Inhalten ab und bietet sie auf Kosten des
+Unternehmens zum Download an. Das Bekanntwerden eines erfolgreichen Einbruchs
+kann zu einem beachtlichen Image- und Vertrauensverlust führen
+\cite[S.~38]{ScO97}.
  
 
 
