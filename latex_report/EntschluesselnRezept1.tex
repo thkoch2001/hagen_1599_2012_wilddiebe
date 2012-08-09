@@ -20,10 +20,18 @@ Häufigkeitsanalyse begonnen.
 
 \paragraph{Häufigkeitsanalyse}
 
+\begin{figure}
+ \includegraphics[width=\textwidth,keepaspectratio=true]{Images/buchstabenhaeufigkeiten_de}
+ \includegraphics[width=\textwidth,keepaspectratio=true]{Images/buchstabenhaeufigkeiten_en}
+ \caption{Häufigkeitsverteilung von Buchstaben im Deutschen (oben) und Englischen (unten) \cite[kap2.pdf, s. 30]{Koebler}}
+ \label{fig:buchstabenhaeufigkeiten}
+\end{figure}
+
 In jeder Sprache kommen die einzelnen Buchstaben in einem ausreichend langen,
-natürlichen Text in einer für die Sprache charakteristischen Häufigkeit vor. Im
-Deutschen ist der am häufigsten vorkommende Buchstabe das E mit einer Häufigkeit
-von etwa 17\%, gefolgt vom N mit etwa 10\%.
+natürlichen Text in einer für die Sprache charakteristischen Häufigkeit vor
+(siehe \cref{fig:buchstabenhaeufigkeiten}). Im Deutschen ist der am
+häufigsten vorkommende Buchstabe das E mit einer Häufigkeit von etwa 17\%,
+gefolgt vom N mit etwa 10\%.
 
 \begin{table}[h]\footnotesize
 \begin{tabular}{*{22}{r}}
@@ -40,21 +48,21 @@ N  &  O  &  Q  &  R  &  T  &  U  &  X  &  Y  &  Z  &  a  &  b  &  c  &  d  &  e 
 n  &  o  &  p  &  q  &  r  &  s  &  t  &  u  &  v  &  x  &  y  &  z  &  ˆ  &  \%  &  ¸  &  Å  \\
 32  &      5  &     21  &     21  &    105  &     13  &     19  &     20  &     36  &      8  &     38  &     18  &      3  &      1  &      5  &      5  \\
 \end{tabular}
-\label{rezept1haeufigkeit}
+\label{tab:rezept1haeufigkeit}
 \end{table}
 
 Die Häufigkeit der einzelnen Zeichen im verschlüsselten Rezept wurde mit einem
 Onlinetool\footnote{\url{http://www.woerter-zaehlen.de/index.php}} gezählt und
-ist in \cref{table:rezept1haeufigkeit} wiedergegeben.
+ist in Tabelle \ref{tab:rezept1haeufigkeit} wiedergegeben.
 
-Die Häufigkeitsanalyse ergab, dass "e" am häufigsten auftritt.
+Die Häufigkeitsanalyse ergab, dass ``e'' am häufigsten auftritt.
 Es wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
 ``Znaqryfghgra'' zu analysieren.
 
-\paragraph{Caesar Chiffre}
+\paragraph{Cesar Chiffre}
 
 Der Name Caesar-Chiffre stammt von dem gleichnamigen Feldherren Gaius Julius
-Caesar (100 v. Chr. – 44 v. Chr.).1 Caesar benutzte diese sehr einfache Form der
+Cesar (100 v. Chr. – 44 v. Chr.).1 Caesar benutzte diese sehr einfache Form der
 Verschlüsselung, um militärische Nachrichten zu chiffrieren.  Es kann ein
 beliebiges Alphabet verwendet werden. Die klassische Version benutzt die
 Großbuchstaben A-Z. Das Alphabet wird zweimal, untereinander aufgeschrieben.

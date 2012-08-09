@@ -1,5 +1,4 @@
 \documentclass[%
-	12t,			% Schriftgröße
 	titlepage,			% es wird eine Titelseite verwendet
 	%parskip=full,		% Abstand zwischen Absätzen (volle Zeile)=full halbe zeille = half
 	headings=normal,	% Größe der Überschriften verkleinern
@@ -25,14 +24,13 @@
 \usepackage{graphicx} % jpg  png  pdf  mps
 \usepackage{xcolor}
 \usepackage{pbox}
-%\usepackage{url}
+\usepackage{url}
 \usepackage{listings}
 \usepackage[german]{varioref}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{bibgerm}
 \usepackage{filecontents}
-\usepackage[german]{cleveref}
 \usepackage[
 pdftitle={Fachpraktikum 01599: IT-Sicherheit},
 pdfsubject={Wilddiebe 3},
@@ -48,6 +46,7 @@ bookmarksopen=true,
 bookmarksopenlevel=3,
 plainpages=false,
 pdfpagelabels=true]{hyperref}
+\usepackage[german]{cleveref}
 
 %Formatierung geht ab hier los:
 \pagestyle{headings}
@@ -109,8 +108,6 @@ basicstyle=\ttfamily%
   {\lstset{language=Metasploit, tabsize=2}}
   {}
 
-\bibliographystyle{alphadin}
-
 \setcounter{tocdepth}{4}  % = Aufnahme in das Inhaltsverzeichnis *
 \setcounter{secnumdepth}{4}%   = Nummerierung vertiefen *
 
@@ -124,8 +121,6 @@ basicstyle=\ttfamily%
  \label{fig:#1}
 \end{figure}}
 \newcommand{\bildref}[1]{\cref{fig:#1}}
-
-\newcommand{\tableref}[1]{\cref{tab:#1}}
 
 \newcommand{\Mayerbrot}{\emph{Mayer Brot}}
 \newcommand{\Muellerbrot}{\emph{Müller Brot}}

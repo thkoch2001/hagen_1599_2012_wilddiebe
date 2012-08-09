@@ -7,7 +7,7 @@ dann werden wir auf \url{https://172.16.14.30} umgeleitet. Die Kommunikation
 erfolgt also über eine gesicherte Verbindung. \Firefox{} kann das Zertifikat
 nicht überprüfen, und gibt eine entsprechende Warnung aus. Wenn wir diese
 ignorieren, gelangen wir zur Homepage von \Mayerbrot{} (siehe
-\bildref{WebServerHacken2}).
+\bildref{WebserverHacken2}).
 
 \bilddatei{WebserverHacken2}{Homepage von \Mayerbrot{}}{0.7}
 
@@ -18,7 +18,7 @@ werden\footnote{Die Entschlüsselung wird in \cref{RezeptDreiEntschluesseln}
 
 Auf der Homepage befindet sich auch ein \emph{Sicherheitsbereich}. Ein Zugriff
 darauf wird mit einer Fehlermeldung quittiert (siehe
-\bildref{WebServerHacken4}). Hier ist wohl das zweite Rezept zu finden. Wenn wir
+\bildref{WebserverHacken4}). Hier ist wohl das zweite Rezept zu finden. Wenn wir
 ins Blaue hinein raten und \url{https://172.16.14.30/private/rezept.txt}
 eintippen, kommen wir auch nicht weiter.
 
@@ -29,7 +29,7 @@ eintippen, kommen wir auch nicht weiter.
 Nachdem \Metasploit{} bereits beim Dateiserver gute Dienste geleistet hat,
 versuchen wir den Webserver auf ähnliche Weise zu attackieren. Durch den
 vorausgegangenen Portscan (siehe \cref{fig:nmap}) haben wir schon eine Liste der
-offenen Ports erhalten (siehe \tableref{WebserverPortScan}).
+offenen Ports erhalten (siehe \cref{WebserverPortScan}).
 
 \begin{table}[H]
 \caption{Offene Ports des Webservers}
@@ -126,7 +126,7 @@ dabei bequem über eine graphische Oberfläche bedient werden.
 
 Um den Webserver von \Mayerbrot{} zu scannen geben wir als \emph{Target} die
 Adresse \url{https://172.16.14.30} ein. Anschließend wählen wir die Plugins
-\emph{Audit} und \emph{Discovery} (siehe \bildref{W3AF1}). Mit \emph{Discovery}
+\emph{Audit} und \emph{Discovery} (siehe \bildref{w3af1}). Mit \emph{Discovery}
 veranlassen wir die Schwachstellen-Analyse und mit \emph{Audit} suchen wir
 entsprechende Exploits. Danach starten wir den Scan-Vorgang.
 
@@ -188,7 +188,7 @@ um die Spuren des Einbruchs zu beseitigen, konnten wir durchführen.
 
 Wie bereits erwähnt, haben wird vom Dateiservers die kompletten
 OpenVPN-Konfigurationsdateien heruntergeladen
-(vgl. \bildref{Dateiserverdateien}). Darunter befindet sich auch das Zertifikat
+(vgl. \bildref{dateiserverdateien}). Darunter befindet sich auch das Zertifikat
 des Dateiservers. Bei einem Zertifikat handelt sich um einen digitalen
 Ausweis. Verwenden wird diesen Ausweis gegenüber dem Webserver, dann muss dieser
 davon ausgehen, dass er es mit dem Dateiserver zu tun hat. Auf diese Weise
@@ -214,12 +214,12 @@ Zertifikat in den Webbrowser importieren wollen.
 Das machen wir auch sogleich. Dazu starten wir \Firefox{} und rufen den
 Zertifikatsmanager auf. Hier gehen wird zur Registerkarte \glqq{}Ihre
 Zertifikate\grqq{} und importieren die Datei \texttt{mayerdatei.pfx}. Als
-Ergebnis erhalten wir das Fenster in \bildref{WebServerHacken8}.
+Ergebnis erhalten wir das Fenster in \bildref{WebserverHacken8}.
 
 \bilddatei{WebserverHacken8}{Importiertes Zertifikat}{0.6}
 
 Wenn wir jetzt auf die Homepage des Webservers zugreifen wird zunächst nach dem
-Zertifikat gefragt (vgl. \bildref{WebServerHacken9}). Hier wählen wir das
+Zertifikat gefragt (vgl. \bildref{WebserverHacken9}). Hier wählen wir das
 Zertifikat des Dateiservers.
 
 \bilddatei{WebserverHacken9}{Zertifizierungsanfrage}{0.6}
@@ -230,7 +230,7 @@ schnell geben wir aber nicht auf und tippen
 \url{https://172.16.14.30/private/rezept.txt} ein. Jetzt erhalten wird das
 verschlüsselte Rezept aus dem Sicherheitsbereich\footnote{Die Entschlüsselung
   des Rezepts wird in \cref{RezeptVierEntschluesseln} gezeigt}
-(vgl. \bildref{WebServerHacken11}). Damit sehen wir, dass es durchaus reicht,
+(vgl. \bildref{WebserverHacken11}). Damit sehen wir, dass es durchaus reicht,
 ein Rechner zu hacken, um Zugriff auf weitere Rechner im Netz zu erhalten.
 
 \bilddatei{WebserverHacken11}{Zweites Rezept des Webservers}{0.6}
