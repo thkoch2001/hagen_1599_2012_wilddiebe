@@ -1,2 +1,39 @@
 \subsection{Rezept 3 entschlüsseln}
 \label{RezeptDreiEntschluesseln}
+
+Die verschlüsselte Datei wurde zunächste einer Häufigkeitsanalyse in
+JCrypTool\footnote{Java Lehrsoftware für Kryptologie, erhältlich unter
+  \url{http://www.cryptool.org}} unterzogen. Als Einstellungen wurden
+``Monoalphabetisch'' sowie als Referenzverteilung ``DEUTSCH Descartes''
+ausgewählt. Als ursprüngliches Alphabet des Klartextes wurde ``Printable ASCII''
+genommen. Die Häufigkeitsanalyse zeigt \cref{fig:rezept3verteilung1}.
+
+\bilddatei{rezept3verteilung1}{}{}
+
+Durch einfaches Ziehen mit der Maus konnte man die tatsächliche Verteilung
+(schwarz) mit der Referenzverteilung (weiß) in Übereinstimmung bringen. Dabei
+wurde der Graph um 47 Stellen verschoben (\cref{fig:rezept3verteilung2}).
+
+\bilddatei{rezept3verteilung2}{}{}
+
+Mit Hilfe der Häufigkeitsverteilung kann man genau sehen, dass das kleine ``e''
+in die Zahl ``6'' verschlüsselt wurde. Leider konnte mit den in JCrypTool
+vorhandenen Alphabeten keine Entschlüsselung gelingen. So wurden zunächst
+manuell mit Hilfe des Editors und Suchen und Ersetzen die Geheimschriftzeichen
+durch die Klartextzeichen ersetzt. Es stellte sich dabei heraus, dass die
+Umlaute und die Leerstellen nicht verschlüsselt wurden. Mit Hilfe eines eigens
+angepaßten Alphabets konnte dann anschließend die Entschlüsselung auch mit dem
+JCrypTool automatisiert werden. Das angepaßte Alphabet ist Printable ASCII ohne
+Leerstellen und Umlaute (\cref{rezept3alphabet}).
+
+\begin{lstlisting}[label=rezept3alphabet]
+!"#$%&'()*+,-./0123456789:;<=>?
+@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+\end{lstlisting}
+
+Im Menü von JCrypTool unter Fenster $\rightarrow$ Benutzervorgaben $\rightarrow$
+Kryptographie $\rightarrow$ Alphabete wurde das benutzerdefinierte Alphabet
+hinzugefügt. Weiterhin wurde der Haken entfernt bei der Option ``Filtern von
+ungültigen Zeichen''.  Mit Hilfe des angepaßten Alphabets und der Wahl von ``O''
+als Schlüssel kann das Rezept nun ganz einfach entschlüsselt werden.  Der
+angewandte Algorithmus ist Cesar-Chiffre mit einer Verschiebung um 47 Zeichen.
