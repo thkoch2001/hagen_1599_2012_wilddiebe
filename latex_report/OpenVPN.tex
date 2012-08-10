@@ -1,2 +1,207 @@
 \section{OpenVPN}
 \label{sec:openvpn}
+
+OpenVPN ermöglicht die Einrichtung eines virtuellen privaten Netzwerkes (VPN),
+das auf Secure Socket Layer (SSL) basiert. Die VPN-Tunnelendpunkte werden durch
+virtuelle Schnittstellen realisiert. OpenVPN arbeitet nicht im Kernel-Space des
+Betriebssystems, sondern im User-Space. Während eines SSL-Handshakes werden
+starke symmetrische Verschlüsselungsverfahren vereinbart, so dass die
+Vertraulichkeit der Daten während der Übertragung durch das VPN gesichert
+ist. Die Authentisierung erfolgt über X.509-Zertifikate oder durch vorab
+vereinbarte Schlüssel.
+
+Der VPN-Server kann ein einfacher Server auf PC-Hardware-Basis sein, auf dem
+z.B. Linux läuft. Auf diesem Server installiert man die OpenVPN-Software.
+
+Auf dem VPN-Client braucht man die OpenVPN-Client-Software. Auch sie ist frei
+verfügbar und läuft unter Windows, Linux oder Mac OS X.
+
+Die wechselseitige Authentisierung kann auf verschiedene Arten
+erfolgen. Besonders einfach zu administrieren ist der VPN-Server, wenn
+X.509-Zertifikate benutzt werden. Als Betreiber eines VPN-Servers betreibt man
+dazu seine eigene Certification Authority (CA). Man erstellt ein
+selbst-signiertes CA-Zertifikat und signiert damit dann das Zertifikat des
+Servers und die Zertifikate der Benutzer.
+
+Auf dem Server braucht man dann
+
+\begin{itemize}
+  \item das CA-Zertifikat,
+  \item den privaten Schlüssel des Servers und
+  \item das Server-Zertifikat.
+\end{itemize}
+
+Auf der Client-Seite braucht man
+
+\begin{itemize}
+  \item das CA-Zertifikat,
+  \item den privaten Schlüssel des Clients und
+  \item das Client-Zertifikat.
+\end{itemize}
+
+Nun kann der Client beim SSL-Handshake den Server anhand seines Zertifikates
+authentisieren und der Server authentisiert den Client anhand des
+Client-Zertifikates. Der VPN-Server braucht insbesondere keine Verbindung zu
+einem Directory-Server oder Ähnliches. Er erkennt neue Benutzer (Clients) immer
+daran, dass sie ein Zertifikat vorweisen, welches von der eigenen CA ausgestellt
+wurde.
+
+Die Konfiguration von OpenVPN ist sehr einfach. Auf der Client-Seite reicht
+bereits eine wenige Zeilen lange Konfigurationsdatei. Die Einrichten des
+OpenVPN-Zugangs wird schrittweise am Beispiel von Windows XP erläutert.
+
+\paragraph{Schritt 1}
+Herunterladen der OpenVPN-Software (Windows Installer
+``openvpn-2.2.2-install.exe'') von der Adresse
+\url{http://openvpn.net/index.php/download/community-downloads.html} und
+Installation dieser.
+
+\paragraph{Erstellung eines eigenen Zertifikats}
+Zur Erleichterung des Ablaufs und der Userinteraktion kommt ein von Michael
+Franke von der Zertifikatserver-Gruppe Süd programmiertes Java-Applet zum
+Einsatz. Dieses bietet zudem den sicherheitstechnischen Vorteil, dass der
+private Schlüssel immer auf dem Rechner des Zertifikatbeantragers liegt und
+nicht über das WWW oder andere Wege verbreitet werden muss.
+
+
+\paragraph{Schritt 2}
+
+Downloaden des von der Zertifikatserver-Gruppe Süd erstellten SSL-Tools von der
+Adresse \url{http://major-bug.de/ssl_cert_request_generator.zip}
+
+Die zip-Datei enthält unter anderem
+
+\begin{itemize}
+  \item den Zertifikatgenerator
+  \item den öffentlichen Schlüssel ``RootCA.muellerbackwaren.crt'' des
+    Zertifikatservers (notwendig, um das ausgestellte Zertifikat in eine
+    Vertrauensstellung zu bringen)
+  \item das Cross-Zertifikat ``RootCA.mayerbrot.local.cross.crt'' (notwendig, um
+    auch im Netz des Fusionspartners sichere Verbindungen herzustellen)
+  \item die Dateien ``UserCA.muellerbackwaren.crt'' und
+    ``ServerCA.muellerbackwaren.crt'' (diese sind jeweils zweckgebunden zu
+    verwenden)
+\end{itemize}
+
+\paragraph{Schritt 3}
+
+Entpacken obiger zip-Datei und Ausführen des Generators
+``ssl\_cert\_request\_generator.jar''.  Dazu ist es erforderlich, dass eine
+aktuelle Java Ausführungsumgebung (JRE) auf dem Rechner installiert ist.
+
+\paragraph{Schritt 4}
+
+Eingabe der Benutzerdaten (Vorname, Name, Bundesland, Stadt,
+Rücksende-E-Mail-Adresse), welche mit den Herrn Naues vorliegenden Personaldaten
+übereinstimmen müssen.
+
+\paragraph{Schritt 5}
+
+Erzeugen des privaten Schlüssels durch einen Klick auf den Button ``Erzeugen''.
+Der Dateiname sollte die Endung *.key haben (z.B. ``StefanTaeuberKey.key'').
+
+\paragraph{Schritt 6}
+
+Vergabe eines geheimen Passworts für den privaten Schlüssel.
+
+\paragraph{Schritt 7}
+
+Abschicken der (E-Mail mit der) Signierungsanfrage an die
+Zertifikatserver-Gruppe Süd.
+
+Das persönliche Zertifikat (mit dem signierten öffentlichen Schlüssel des
+Zertifikatinhabers) bekommt man schließlich kurze Zeit später als E-Mail-Anhang.
+
+\paragraph{Schritt 8 - Importieren der Zertifikate bei Windows XP}
+
+Die Datei ``RootCA.muellerbackwaren.crt'' muss beim Import manuell in die
+vertrauenswürdigen Stammzertifizierungsstellen eingefügt werden. Die anderen
+Zertifikate können dann automatisch importiert werden.
+
+\begin{itemize}
+  \item ``Start''
+  \item ``Ausführen''
+  \item Eingabe von ``certmgr.msc''
+  \item ``OK''
+  \item ``Vertrauenswürdige Stammzertifizierungsstellen'' auswählen
+  \item auf Objekttyp ``Zertifikate'' mit der rechten Maustaste klicken
+  \item ``Alle Tasks''
+  \item ``Importieren\ldots''
+  \item im Zertifikatsimport-Assistenten auf ``Weiter'' klicken
+  \item Ort des Zertifikates ``(Durch)suchen''
+  \item Zertifikat auswählen und ``Öffnen'' anklicken
+  \item ``Weiter''
+  \item untere Option ``Alle Zertifikate in folgendem Speicher speichern'' auswählen
+  \item ``Weiter''
+  \item ``Fertigstellen''
+\end{itemize}
+
+Auf gleiche Weise müssen auch die Zertifikate
+``RootCA.mayerbrot.local.cross.crt'', ``UserCA.muellerbackwaren.crt'' und des
+persönlichen Zertifikate ``stefan.taeuber.muellerbackwaren.crt'' importiert
+werden.
+
+\paragraph{Schritt 9 -- Konfiguration von OpenVPN}
+
+In der zip-Datei der Zertifikatserver-Gruppe Süd (vgl. Schritt 2) ist die Datei
+``muster1.conf'' enthalten. Diese kann als Grundlage für die
+OpenVPN-Konfigurationsdatei dienen. Es müssen lediglich die Namen von privatem
+und öffentlichem Schlüssel angepasst werden. Etwaige Probleme mit unsichtbaren
+(Linux-)Steuerzeichen lassen sich z.B. dadurch beheben, dass man die
+Konfigurationsparameter in einer ``frischen'' Textdatei manuell eintippt\ldots
+
+Die Konfigurationsdatei ``openvpn.config.ovpn'' wird mit Hilfe eines
+Text-Editors erstellt und enthält:
+
+\begin{lstlisting}
+client
+float
+dev tap
+tun-mtu 1492
+mssfix
+proto udp
+remote muellerbw.dyndns.org 11940
+tls-remote server
+ca ca-bundle.txt
+cert stefan.taeuber.muellerbackwaren.crt
+key StefanTaeuberKey.key
+auth SHA1
+nobind
+comp-lzo
+persist-key
+persist-tun
+verb 3
+\end{lstlisting}
+
+\paragraph{Schritt 10}
+
+Verschieben der vier benötigten Dateien in den Dateiordner
+\lstinline{C:\Programme\OpenVPN\config}
+
+\begin{enumerate}
+  \item ``ca-bundle.txt'' (enthält die erforderlichen root- und intermediate-Zertifikate)
+  \item ``StefanTaeuberKey.key'' (privater ``Wilddieb-Schlüssel'')
+  \item ``stefan.taeuber.muellerbackwaren.crt'' (signiertes ``Wilddieb-Zertifikat'')
+  \item ``openvpn.config.ovpn''
+\end{enumerate}
+
+\paragraph{Schritt 11 -- Einloggen ins Firmennetz mit OpenVPN}
+
+Nachdem nun alle Vorarbeiten abgeschlossen sind, kann man sich mit Hilfe der
+grafischen Bedienoberfläche OpenVPN GUI bequem ins Firmennetz einwählen.
+
+\paragraph{Schritt 12}
+
+Das entsprechende Symbol (zwei kleine rote Monitore) in der Startleiste mit der
+linken Maustaste doppelt anklicken (alternativ: rechte Maustaste, danach
+``Connect'' auswählen), dann das in Schritt 6 vergebene geheime Passwort für den
+privaten Schlüssel eintippen und mit ``OK'' bestätigen.
+
+Die beiden kleinen Monitore des OpenVPN GUI-Symbols verfärben sich zunächst gelb
+und wechseln schließlich nach erfolgreichem Verbindungsaufbau auf grün.
+
+Es ist geschafft!
+
+% Literaturliste
+% Stefan Wohlfeil. Sicherheit im Internet 2. FernUniversität in Hagen, 10/2011.
+% Zertifikatserver-Gruppe Süd. Handout_Muellerbackwaren.pdf, 06/2012.
