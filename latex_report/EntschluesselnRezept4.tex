@@ -1,2 +1,51 @@
 \subsection{Rezept 4 entschlüsseln}
 \label{RezeptVierEntschluesseln}
+
+Eine Häufigkeitsanalyse ergab, dass die Verteilung der deutschen Sprache
+entsprach und somit eine Transpositionschiffre vorliegen musste. Der Aufbau des
+Geheimtextes legte zudem nahe, dass der Algorithmus zeilen- bzw. absatzweise
+angewendet wurde, da jede Zeile des Geheimtextes, die keine Leerzeile war, mit
+einem Großbuchstaben oder einer Ziffer begann, jedoch nie mit einem
+Kleinbuchstaben, also das erste Zeichen einer Klartextzeile seine Position
+behält.
+
+Unter diesen Voraussetzungen kann eine Entschlüsselung bzw. eine Analyse zur
+Feststellung des Verschlüsselungsverfahrens zunächst anhand einer beliebigen
+Zeile unabhängig von den anderen Zeilen vorgenommen werden. Die erste Zeile des
+Geheimtextes (``Sarcwrbohzt'') war die kürzeste und bedeutete als Klartext wohl
+``Schwarzbrot''.
+
+Auf Basis dieser Vermutung wurde zunächst eine passende Permutation einer
+bestimmten Länge gesucht, die sequentiell auf die Zeile bis zur ihrem Ende
+anzuwenden wäre. Allerdings zeigte sich bei Anwendung aller passenden (d.h. den
+Klartext ergebenden) Permutationen auf die nächste Textzeile, dass kein
+sinnvoller Klartext entstand. Nun hätte es sein können, dass es daran lag, dass
+die Länge der korrekten Permutation die Länge der ersten Zeile (11 Zeichen)
+überstieg. Allerdings war wahrscheinlich ein anderer Algorithmus verwendet
+worden, da die Anzahl möglicher Permutationen mit der Fakultät ihrer Länge
+zunehmen, aber die gegebene Aufgabenstellen als lösbar anzunehmen war.
+
+Die Ermittlung des Algorithmus würde sehr erleichtert werden, wenn mehr Klartext
+zur Verfügung stand. Unter der Annahme, dass beide Rezepte des Webservers aus
+einer gemeinsamen Internetquelle stammen, wurde daher zunächst ein Ausschnitt
+aus dem anderen, bereits entschlüsselten Rezept gegoogelt. Auf der
+entsprechenden Rezepte-Homepage wurde anschließend eine Suche nach
+Schwarzbrot-Rezepten durchgeführt. Unter den angezeigten Treffern wurde wiederum
+dasjenige Rezept herausgesucht, dessen Absätze mit denjenigen Buchstaben des
+verschlüsselten Schwarzbrot-Rezepts begannen - zur Erinnerung: es lag ja die
+Vermutung nahe, dass der erste Buchstabe jedes Absatzes des Klartextes im
+Geheimtext seine Position beibehielt, da es keine Kleinbuchstaben am
+Zeilenbeginn gab.
+
+Es fand sich tatsächlich ein passendes Rezept, welches für die weitere Analyse
+herangezogen wurde. Durch Überlegen und manuelles Probieren wurde schließlich
+folgender Verschlüsselungsalgorithmus identifiziert: Jede Zeile des Klartextes
+wird in Vierergruppen aufgeteilt, die man untereinander schreibt. Der Geheimtext
+ergibt sich, indem man die Zeichen der ersten der entstandenen Spalten
+hintereinander schreibt, dann zeilenweise die Zeichen der zweiten und vierten
+Spalte und erst komplett danach die Zeichen der dritten Spalte.
+
+Mit diesem Wissen wurde der Geheimtexts entschlüsselt. Der Klartext war nicht
+völlig mit dem Rezept auf der Internetseite identisch; beispielsweise war der
+Position der Zutaten im Rezept verändert und einige Zeichen waren ausgetauscht
+worden, es war etwa das „ß“ durch „ss“ ersetzt worden.
