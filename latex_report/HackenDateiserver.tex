@@ -1,7 +1,6 @@
 \subsection{Dateiserver hacken}
 \label{sec:dateiserverhacken}
 
-
 \subsubsection{Zugriff auf den Dateiserver}
 
 Aus den offenen Ports des Rechners \path{datei.mayerbrot.local} kann man
@@ -38,36 +37,44 @@ Rezept1NR.txt  testdatei.txt
 
 Das \Metasploit{}-Projekt ist ein freies Open-Source-Projekt zur
 Computersicherheit, das Informationen über Sicherheitslücken bietet und bei
-Penetrationstests sowie der Entwicklung von IDS-Signaturen(? @TODO) eingesetzt
-werden kann. Das bekannteste Teilprojekt ist das \emph{Metasploit Framework}, ein
+Penetrationstests sowie der Entwicklung von IDS-Signaturen eingesetzt werden
+kann. Das bekannteste Teilprojekt ist das \emph{Metasploit Framework}, ein
 Werkzeug zur Entwicklung und Ausführung von Exploits\footnote{Ein Exploit dient
-  dem Eindringen in ein Zielsystem, indem ein Programmfehler ausgenutzt wird.} gegen verteilte
-Zielrechner. Andere wichtige Teilprojekte sind das Shellcode-Archiv\footnote{Payload (Nutzlast) bezeichnet den Code, der auf dem
-  Zielrechner bei einem erfolgreichen Einbruch ausgeführt werden soll. Meist ist
-  dies Shellcode, der dem Angreifer ermöglicht auf eine Shell zuzugreifen. Es
-  könnte aber auch ein Meterpreter oder VNC-Server ausgeführt werden.} und
-Forschung im Bereich der IT-Sicherheit.
+  dem Eindringen in ein Zielsystem, indem ein Programmfehler ausgenutzt wird.}
+gegen verteilte Zielrechner.
 
-Für den Zugriff auf das \emph{Metasploit Framework} gibt es verschiedene Benutzeroberflächen. 
-Eine davon ist \Armitage{}. Dabei handelt es sich um eine grafische Oberfläche, die eine einfache 
-und intuitive Bedienung ermöglicht. Für unsere Hacking-Versuche wählen wir daher \Armitage.
+Andere wichtige Teilprojekte sind das Shellcode-Archiv\footnote{Payload
+  (Nutzlast) bezeichnet den Code, der auf dem Zielrechner bei einem
+  erfolgreichen Einbruch ausgeführt werden soll. Meist ist dies Shellcode, der
+  dem Angreifer ermöglicht auf eine Shell zuzugreifen. Es könnte aber auch ein
+  Meterpreter (spezielle Metasploit shell) oder VNC-Server ausgeführt werden.}
+Werkzeuge zur weiteren Analyse oder Manipulation eines übernommenen Systems
+(Post)\footnote{Hierunter fallen beispielsweise das Auslesen von System-
+  bzw. Anwendungsinformationen, das Installieren einer permanenten Hinterür und
+  die Ausweitung der bereits erlangten Benutzerrechte.} und Hilfswerkzeuge
+(Auxiliary).
 
-Nach dem Programmstart müssen wir zuerst den anzugreifenden Computer bestimmen. Dazu wählen wir im Menü \emph{Hosts} 
-den Eintrag \emph{\glqq{}Add Hosts\ldots{}\grqq{}} und fügen die IP-Adresse 172.16.14.40 hinzu.
+Die Hilfswerkzeuge sind im einzelnen:
 
-Bevor wir mit der Schwachstellen-Analyse beginnen können, muss \Armitage{} Informationen über den anzugreifenden Rechner erhalten. Das erreichen wir, indem wir über das Kontextmenü des Hosts einen \emph{Scan} starten. \Armitage{} bekommt so eine Liste der offenen Ports und der verfügbaren Dienste und kann mit der Schwachstellen-Analyse beginnen.
+\begin{itemize}
+  \item ``Scanner'' zur Analyse von Computerssystemen.
+  \item ``Sniffer'' zur Aufzeichnung des Datenverkehrs eines Netzwerks.
+  \item ``Spoofer'' zur Manipulation von Netzwerkprotokollen. (ARP/MAC/DHCP,DNS)
+  \item ``Fuzzers'' Automatisierte Tests, die mit Hilfe von ungültigen,
+    unerwarteten oder zufälligen Daten einen Dienst auf sicherheitsrelevante
+    Probleme untersuchen.
+  \item Serverdienste und Clients. (FTP, SMTP, DNS, DHCP, POP3, usw.)
+\end{itemize}
 
-Hierzu wählen wir im Menü \emph{Attacks} den Befehl \emph{\glqq{}Find Attacks\grqq{}}. \Armitage{} zeigt daraufhin \emph{mögliche} Angriffspunkte (sog. \emph{Exploits}) in den Kategorien \texttt{dcerpc}, \texttt{ids}, \texttt{oracle}, \texttt{samba} und \texttt{smb} an. Ob das System tatsächlich über diese Exploits angreifbar ist, prüfen wir mit der Funktion \emph{\glqq{}check exploits\ldots\grqq{}}. Nur für den Exploit \texttt{windows/smb/ms08\_067\_netapi} wird eine Verwundbarkeit bestätigt. (siehe \bildref{DateiserverHacken1}).
+Für Verwendung des Frameworks stehen mehrere Alternativen zur Verfügung:
 
-\bilddatei{DateiserverHacken1}{Check Exploits}{0.7}
+\begin{itemize}
+  \item msfconsole --- Eine interaktive Konsolenanwendung
+  \item msfcli     --- Kommandozeilenbasierte Ausführung einzelner Befehle.
+  \item Armitage   --- GUI-Frontend
+\end{itemize}
 
-Über das Kontextmenü rufen wir diesen Exploit auf. Der erfolgreiche Angriff ist sofort grafisch zu erkennen, weil das Host 
-jetzt rot dargestellt wir und mit Blitzen versehen ist. Jetzt können wir verschiedene Funktionen auf dem Host durchführen.
-Um das zweite Rezept herunter zu laden gehen wir im Kontextmenü über \emph{Meterpreter 1} und \emph{Explore} zu \emph{\glqq{}Browse files\grqq{}}. Daraufhin erscheint eine Registerkarte, mit den Dateien und Verzeichnissen des Dateiservers. Jetzt können zum Verzeichnis \path{C:\Geheimrezepte} navigieren und anschließend über das Kontextmenü das verschlüsselte Rezept\footnote{Die Entschlüsselung des Rezepts wird in \cref{RezeptZweiEntschluesseln} gezeigt} herunterladen (siehe \bildref{DateiserverHacken3}).
-
-\bilddateisloppy{DateiserverHacken3}{Datei herunterladen}{0.7}
-
-\subsubsection{Benutzung von Metasploit}
+\subsubsection{Metasploit Konsole}
 
 Nachdem die Metasploitkonsole über den Befehl \lstinline{./msfconsole} gestartet
 wurde, begrüßt sie den Benutzer mit den Anzahlen der bekannten
@@ -345,3 +352,45 @@ meterpreter > download Rezept2NJ.txt
 
 meterpreter > ;-)
 \end{lstlisting}
+
+\subsubsection{Armitage}
+
+Für den Zugriff auf das \emph{Metasploit Framework} gibt es verschiedene
+Benutzeroberflächen.  Eine davon ist \Armitage{}. Dabei handelt es sich um eine
+grafische Oberfläche, die eine einfache und intuitive Bedienung ermöglicht. Für
+unsere Hacking-Versuche wählen wir daher \Armitage.
+
+Nach dem Programmstart müssen wir zuerst den anzugreifenden Computer
+bestimmen. Dazu wählen wir im Menü \emph{Hosts} den Eintrag \emph{\glqq{}Add
+  Hosts\ldots{}\grqq{}} und fügen die IP-Adresse 172.16.14.40 hinzu.
+
+Bevor wir mit der Schwachstellen-Analyse beginnen können, muss \Armitage{}
+Informationen über den anzugreifenden Rechner erhalten. Das erreichen wir, indem
+wir über das Kontextmenü des Hosts einen \emph{Scan} starten. \Armitage{}
+bekommt so eine Liste der offenen Ports und der verfügbaren Dienste und kann mit
+der Schwachstellen-Analyse beginnen.
+
+Hierzu wählen wir im Menü \emph{Attacks} den Befehl \emph{\glqq{}Find
+  Attacks\grqq{}}. \Armitage{} zeigt daraufhin \emph{mögliche} Angriffspunkte
+(sog. \emph{Exploits}) in den Kategorien \texttt{dcerpc}, \texttt{ids},
+\texttt{oracle}, \texttt{samba} und \texttt{smb} an. Ob das System tatsächlich
+über diese Exploits angreifbar ist, prüfen wir mit der Funktion
+\emph{\glqq{}check exploits\ldots\grqq{}}. Nur für den Exploit
+\texttt{windows/smb/ms08\_067\_netapi} wird eine Verwundbarkeit
+bestätigt. (siehe \bildref{DateiserverHacken1}).
+
+\bilddatei{DateiserverHacken1}{Check Exploits}{0.7}
+
+Über das Kontextmenü rufen wir diesen Exploit auf. Der erfolgreiche Angriff ist
+sofort grafisch zu erkennen, weil das Host jetzt rot dargestellt wir und mit
+Blitzen versehen ist. Jetzt können wir verschiedene Funktionen auf dem Host
+durchführen.  Um das zweite Rezept herunter zu laden gehen wir im Kontextmenü
+über \emph{Meterpreter 1} und \emph{Explore} zu \emph{\glqq{}Browse
+  files\grqq{}}. Daraufhin erscheint eine Registerkarte, mit den Dateien und
+Verzeichnissen des Dateiservers. Jetzt können zum Verzeichnis
+\path{C:\Geheimrezepte} navigieren und anschließend über das Kontextmenü das
+verschlüsselte Rezept\footnote{Die Entschlüsselung des Rezepts wird in
+  \cref{RezeptZweiEntschluesseln} gezeigt} herunterladen (siehe
+\bildref{DateiserverHacken3}).
+
+\bilddateisloppy{DateiserverHacken3}{Datei herunterladen}{0.7}
