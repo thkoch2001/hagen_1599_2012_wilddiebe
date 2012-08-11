@@ -31,7 +31,7 @@ versuchen wir den Webserver auf ähnliche Weise zu attackieren. Durch den
 vorausgegangenen Portscan haben wir schon eine Liste der
 offenen Ports erhalten (siehe \cref{fig:offeneports}).
 
-Um eventuelle Schwachstellen zu entdecken starten wir \Armitage{}. Anschließend
+Um eventuelle Schwachstellen zu entdecken, starten wir \Armitage{}. Anschließend
 fügen wir den Host 172.16.14.30 hinzu und führen einen Scan aus. Wenn dieser
 abgeschlossen ist, können wir über \emph{\glqq{}Find Attacks\grqq{}}
 Angriffspunkte suchen.
@@ -45,11 +45,11 @@ irgendwie nicht zum gewünschten Erfolg.
 
 \bilddatei{WebDatei1}{Webserver Exploit}{0.7}
 
-In \Metasploit{} wird jedem Exploit ein Rang zugeordnet. Damit wird der
-Wirkungsgrad und Einfachheit des Exploits bewertet. Der Rang reicht von
+In \Metasploit{} wird jedem Exploit ein Rang zugeordnet. Damit werden der
+Wirkungsgrad und die Einfachheit des Exploits bewertet. Der Rang reicht von
 \emph{Poor} bis \emph{Excellent}. Wir könnten jetzt unsere Ansprüche
 herunterschrauben und auch schlechtere Exploits zulassen. Vielleicht sollten wir
-unser Suche aber auf andere Tools ausweiten.
+unsere Suche aber auf andere Tools ausweiten.
 
 
 \subsubsection{Webscanner}
@@ -69,7 +69,7 @@ Bei Nikto handelt es sich um einen Webserver-Scanner, der auf den gängigen
 Betriebssystemen (\emph{Windows}, \emph{Mac OSX}, \emph{Linux} und \emph{UNIX})
 verfügbar ist. Nikto kann dabei über 6400 Probleme in CGI- und PHP-Dateien
 erkennen. Außerdem wird nach veralteten Versionen oder bekannten Problemen
-spezieller Version gesucht (vgl. \cite{Nikto}).
+spezieller Versionen gesucht (vgl. \cite{Nikto}).
 
 Gestartet wird die Analyse mit dem Befehl \texttt{nikto -h 172.16.14.30}. Als
 Ergebnis werden folgende Warnungen erzeugt:
@@ -108,7 +108,7 @@ Nikto beschränkt sich W3AF dabei nicht nur auf die Schwachstellen-Analyse,
 sondern bietet auch entsprechende Exploits an (vgl. \cite{W3AF}). W3AF kann
 dabei bequem über eine graphische Oberfläche bedient werden.
 
-Um den Webserver von \Mayerbrot{} zu scannen geben wir als \emph{Target} die
+Um den Webserver von \Mayerbrot{} zu scannen, geben wir als \emph{Target} die
 Adresse \url{https://172.16.14.30} ein. Anschließend wählen wir die Plugins
 \emph{Audit} und \emph{Discovery} (siehe \bildref{w3af1}). Mit \emph{Discovery}
 veranlassen wir die Schwachstellen-Analyse und mit \emph{Audit} suchen wir
@@ -116,10 +116,10 @@ entsprechende Exploits. Danach starten wir den Scan-Vorgang.
 
 \bilddatei{w3af1}{W3AF Scan config}{0.6}
 
-Für den Analyse wird ein Proxy mit dem Namen \emph{spiderMan} gestartet, der
-über \texttt{127.0.0.1:44444} zu erreichen wird. Wir konfigurieren \Firefox{}
+Für die Analyse wird ein Proxy mit dem Namen \emph{spiderMan} gestartet, der
+über \texttt{127.0.0.1:44444} zu erreichen sein wird. Wir konfigurieren \Firefox{}
 so, dass die Kommunikation über diesen Proxy abläuft. Anschließend können wir
-die Homepage von \Mayerbrot{} aufgerufen und durch die Anwendung
+die Homepage von \Mayerbrot{} aufrufen und durch die Anwendung
 navigieren. Sind wir damit fertig, dann geben wir die Adresse
 \url{http://127.7.7.7/spiderMan?terminate} ein.
 
@@ -136,7 +136,7 @@ einer etwas Brauchbares liefert. Vielleicht sollten wir aber neue Strategien ins
 Auge fassen.
 
 Wenn ein Einbrecher über das Schlafzimmerfenster in eine Wohnung eingebrochen
-ist, wird er von dort aus die anderen Zimmer durchsuchen. Den Einbruch ins
+ist, wird er von dort aus die anderen Zimmer durchsuchen. Der Einbruch ins
 Firmennetz von \Mayerbrot{} ist uns bereits über den Dateiserver gelungen. Wir
 sollten uns fragen, ob wir diese Schwachstelle weiter ausnutzen
 können. Zumindest dürfte der Dateiserver einen gewissen Vertrauensvorsprung
@@ -144,18 +144,18 @@ gegenüber firmenfremden Computern haben.
 
 Um dies zu testen, übernehmen wir erneut den Dateiserver\footnote{dazu gehen wir
   wie in \cref{sec:dateiserverhacken} vor}. Maximale Kontrolle über den
-Dateiserver erhalten werden, indem wir eine VNC-Sitzung aufbauen. Dazu gehen wir
+Dateiserver erhalten wir, indem wir eine VNC-Sitzung aufbauen. Dazu gehen wir
 über \emph{Meterpreter 1} zu \emph{Interact} und dann zum Eintrag \emph{Desktop
   (VNC)}. Anschließend steht der VNC-Dienst über \url{127.0.0.1:5934} zur
 Verfügung. Wir tragen im VNC-Viewer von \Metasploit{} die angegebene Adresse
-ein, und erhalten Zugang zum Dateiserver (siehe \bildref{WebDatei12}).
+ein und erhalten Zugang zum Dateiserver (siehe \bildref{WebDatei12}).
 
 \bilddatei{WebDatei12}{VNC-Sitzung mit Dateiserver}{0.6}
 
 Auf dem Desktop ist das Icon von \emph{OpenVPN GUI} zu sehen. Aus unseren
 Erfahrungen mit \emph{OpenVPN GUI}\footnote{vgl. \cref{sec:openvpn}} wissen wir,
 dass im Konfigurationsverzeichnis auch das Zertifikat des Dateiservers zu
-finden. Es kann nicht schaden, das komplette Konfigurationsverzeichnis auf
+finden sein muss. Es kann nicht schaden, das komplette Konfigurationsverzeichnis auf
 unseren Rechner zu kopieren.
 
 Anschließend kümmern wir uns um das geheime Rezept. Dazu versuchen wir die
@@ -170,19 +170,19 @@ um die Spuren des Einbruchs zu beseitigen, konnten wir durchführen.
 
 \subsubsection{Zugriff mit dem Zertifikat}
 
-Wie bereits erwähnt, haben wird vom Dateiservers die kompletten
+Wie bereits erwähnt, haben wir vom Dateiserver die kompletten
 OpenVPN-Konfigurationsdateien heruntergeladen
 (vgl. \bildref{dateiserverdateien}). Darunter befindet sich auch das Zertifikat
 des Dateiservers. Bei einem Zertifikat handelt sich um einen digitalen
-Ausweis. Verwenden wird diesen Ausweis gegenüber dem Webserver, dann muss dieser
+Ausweis. Verwenden wir diesen Ausweis gegenüber dem Webserver, dann muss dieser
 davon ausgehen, dass er es mit dem Dateiserver zu tun hat. Auf diese Weise
 könnten wir unter dem Namen des Dateiservers ungestört weitere Tests
-durchführen. Zunächst wollen prüfen, ob wir damit auf den geschützten Bereich
+durchführen. Zunächst wollen wir prüfen, ob wir damit auf den geschützten Bereich
 des Webservers zugreifen können.
 
 \bilddatei{dateiserverdateien}{OpenVPN-Konfigurationsdateien des Dateiservers}{0.6}
 
-Um ein Zertifikat in \Firefox{} zu importieren muss es als PFX-Datei
+Um ein Zertifikat in \Firefox{} zu importieren, muss es als PFX-Datei
 vorliegen. Wir haben aber nur eine crt-Datei und den privaten
 Schlüssel. Allerdings können wir daraus über folgendes Kommando eine PFX-Datei
 erzeugen:
@@ -196,7 +196,7 @@ Bei der Frage nach dem Schlüssel wählen wir 123 und erhalten die Datei
 Zertifikat in den Webbrowser importieren wollen.
 
 Das machen wir auch sogleich. Dazu starten wir \Firefox{} und rufen den
-Zertifikatsmanager auf. Hier gehen wird zur Registerkarte \glqq{}Ihre
+Zertifikatsmanager auf. Hier gehen wir zur Registerkarte \glqq{}Ihre
 Zertifikate\grqq{} und importieren die Datei \texttt{mayerdatei.pfx}. Als
 Ergebnis erhalten wir das Fenster in \bildref{WebserverHacken8}.
 
@@ -211,11 +211,11 @@ Zertifikat des Dateiservers.
 Greifen wir jetzt auf den Sicherheitsbereich zu, dann erscheint die Meldung:
 \glqq{}Dieser Text ist nur mit gültigem Client-Zertifikat abrufbar\grqq{}. So
 schnell geben wir aber nicht auf und tippen
-\url{https://172.16.14.30/private/rezept.txt} ein. Jetzt erhalten wird das
+\url{https://172.16.14.30/private/rezept.txt} ein. Jetzt erhalten wir das
 verschlüsselte Rezept aus dem Sicherheitsbereich\footnote{Die Entschlüsselung
   des Rezepts wird in \cref{RezeptVierEntschluesseln} gezeigt}
 (vgl. \bildref{WebserverHacken11}). Damit sehen wir, dass es durchaus reicht,
-ein Rechner zu hacken, um Zugriff auf weitere Rechner im Netz zu erhalten.
+einen Rechner zu hacken, um Zugriff auf weitere Rechner im Netz zu erhalten.
 
 \bilddatei{WebserverHacken11}{Zweites Rezept des Webservers}{0.6}
 
