@@ -1,14 +1,14 @@
 \section{OpenVPN}
 \label{sec:openvpn}
 
-OpenVPN ermöglicht die Einrichtung eines virtuellen privaten Netzwerkes (VPN),
-das auf Secure Socket Layer (SSL) basiert. Die VPN-Tunnelendpunkte werden durch
-virtuelle Schnittstellen realisiert. OpenVPN arbeitet nicht im Kernel-Space des
-Betriebssystems, sondern im User-Space. Während eines SSL\hyp Handshakes werden
-starke symmetrische Verschlüsselungsverfahren vereinbart, so dass die
-Vertraulichkeit der Daten während der Übertragung durch das VPN gesichert
-ist. Die Authentisierung erfolgt über X.509-Zertifikate oder durch vorab
-vereinbarte Schlüssel.
+OpenVPN ist eine freie Software zur Einrichtung eines virtuellen privaten
+Netz\-werk\-es (VPN) auf der Basis von Secure Socket Layer (SSL). Die
+VPN-Tunnelendpunkte werden durch virtuelle Schnittstellen realisiert. OpenVPN
+arbeitet nicht im Kernel-Space des Betriebssystems, sondern im
+User-Space. Während eines SSL\hyp Handshakes werden starke symmetrische
+Verschlüsselungsverfahren vereinbart, so dass die Vertraulichkeit der Daten
+während der Übertragung durch das VPN gesichert ist. Die Authentisierung erfolgt
+über X.509-Zertifikate oder durch vorab vereinbarte Schlüssel.
 
 Der VPN-Server kann ein einfacher Server auf PC-Hardware-Basis sein, auf dem
 z.B. Linux läuft. Auf diesem Server installiert man die OpenVPN-Software.
@@ -46,17 +46,12 @@ einem Directory-Server oder Ähnliches. Er erkennt neue Benutzer (Clients) immer
 daran, dass sie ein Zertifikat vorweisen, welches von der eigenen CA ausgestellt
 wurde.
 
-Die Konfiguration von OpenVPN ist sehr einfach. Auf der Client-Seite reicht
-bereits eine wenige Zeilen lange Konfigurationsdatei. Die Einrichten des
-OpenVPN\hyp Zugangs wird schrittweise am Beispiel von Windows XP erläutert.
+Die Konfiguration von OpenVPN\footnote{\url{http://openvpn.net}} ist sehr
+einfach. Auf der Client-Seite reicht bereits eine wenige Zeilen lange
+Konfigurationsdatei. Die Einrichten des OpenVPN\hyp Zugangs wird schrittweise am
+Beispiel von Windows XP erläutert.
 
-\paragraph{Schritt 1}
-Herunterladen der OpenVPN-Software (Windows Installer
-\path{openvpn-2.2.2-install.exe}) von der Adresse
-\url{http://openvpn.net/index.php/download/community-downloads.html} und
-Installation dieser.
-
-\paragraph{Erstellung eines eigenen Zertifikats}
+\paragraph{Schritt 1 -- Erstellung eines eigenen Zertifikats}
 Zur Erleichterung des Ablaufs und der Userinteraktion kommt ein von Michael
 Franke von der Zertifikatserver-Gruppe Süd programmiertes Java-Applet zum
 Einsatz. Dieses bietet zudem den sicherheitstechnischen Vorteil, dass der
@@ -78,7 +73,7 @@ Die zip-Datei enthält unter anderem
     Vertrauensstellung zu bringen)
   \item das Cross-Zertifikat \path{RootCA.mayerbrot.local.cross.crt} (notwendig, um
     auch im Netz des Fusionspartners sichere Verbindungen herzustellen)
-  \item die Dateien \path{UserCA.muellerbackwaren.crt} und
+  \item die Zertifikate \path{UserCA.muellerbackwaren.crt} und
     \path{ServerCA.muellerbackwaren.crt} (diese sind jeweils zweckgebunden zu
     verwenden)
 \end{itemize}
@@ -86,7 +81,7 @@ Die zip-Datei enthält unter anderem
 \paragraph{Schritt 3}
 
 Entpacken obiger zip-Datei und Ausführen des Generators
-\path{ssl\_cert\_request\_generator.jar}.  Dazu ist es erforderlich, dass eine
+\path{ssl_cert_request_generator.jar}.  Dazu ist es erforderlich, dass eine
 aktuelle Java Ausführungsumgebung (JRE) auf dem Rechner installiert ist.
 
 \paragraph{Schritt 4}

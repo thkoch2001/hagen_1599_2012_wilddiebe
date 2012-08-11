@@ -49,33 +49,11 @@ N O P Q R S T U V W X Y Z
 ZNAQRYFGHGRA -> MANDELSTUTEN
 \end{lstlisting}
 
-\begin{lstlisting}[caption=Quellcode rot13.c]
-/*
- * Rot-13 encoder/decoder in C
- **/
-
-#include <stdio.h>
-#include <ctype.h>
-
-int rot13( int c );
-
-int main() {
-  int c;
-  while ( ( c = getchar() ) != EOF ) {
-    putchar( rot13( c ) );
-  }
-
-  return 0;
-}
-
-int rot13( int c ) {
-  return ( isalpha(c) )
-         ? (( tolower(c) > 'm' )
-           ? ( c - 13 )
-           : ( c + 13 ))
-         : c;
-}
-\end{lstlisting}
+\begin{figure}[tb]
+\lstinputlisting{listings/rot13.c}
+\caption{Quellcode rot13.c}
+\label{listingrot13}
+\end{figure}
 
 \begin{quote}
 Mandelstuten

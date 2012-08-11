@@ -17,34 +17,12 @@ root:~$cd /usr/ports/net/nmap && make install clean
 \end{verbatim}
 
 \begin{figure}
-\begin{lstlisting}
-#!/bin/bash
-
-DT=`/bin/date +\%H_\%M_\%S_\%d_\%m_\%y`
-LOG_FILE=scan_${DT}.log
-
-nmap -Avv 172.16.14.0/24 > $LOG_FILE
-./nsscan.sh "$LOG_FILE"
-
-\end{lstlisting}
+\lstinputlisting[language=Metasploit]{listings/nmap.sh}
 \caption{Script für dynamischen Portscan: nmap.sh}
 \end{figure}
 
 \begin{figure}
-\begin{lstlisting}
-#!/bin/bash
-
-ips=`cat $1 | grep "open port" | awk '{ print $6 }' | sort | uniq`
-
-for i in $ips 
-do
-  nslookup $i 172.16.19.1 >> tmp 
-done
-
-cat tmp | grep name | sort | uniq > $1_names.txt
-
-rm -f tmp
-\end{lstlisting}
+\lstinputlisting[language=Metasploit]{listings/nsscan.sh}
 \caption{Script zur Namensauflösung: nsscan.sh}
 \end{figure}
 
@@ -53,28 +31,8 @@ eine Liste von Hosts und ihrer offenen Ports im Netzwerk. Die Hosts werden
 zunächst als IP Adressen aufgeführt und darunter werden die dazugehörigen DNS
 Namen aufgelistet.
 \begin{figure}
-\begin{lstlisting}
-Initiating Connect Scan at 19:27
-Scanning 2 hosts [1000 ports/host]
-Discovered open port 22/tcp on 172.16.14.10
-Discovered open port 80/tcp on 172.16.14.10
-Discovered open port 445/tcp on 172.16.14.40
-Discovered open port 1025/tcp on 172.16.14.40
-Discovered open port 139/tcp on 172.16.14.40
-Discovered open port 3389/tcp on 172.16.14.40
-Discovered open port 135/tcp on 172.16.14.40
-Discovered open port 1026/tcp on 172.16.14.40
-.
-.
-.
-10.14.16.172.in-addr.arpa	name = rootca.mayerbrot.local.
-40.14.16.172.in-addr.arpa	name = datei.mayerbrot.local.
-.
-.
-.
-\end{lstlisting}
-\caption{Script für dynamischen Portscan: nmap.sh}
-
+\lstinputlisting[language=Metasploit]{listings/hostlist}
+\caption{Ausgabe von nmap.sh: Die Liste der gefundenen hosts}
 \end{figure}
 
 \subsubsection{Zenmap}
