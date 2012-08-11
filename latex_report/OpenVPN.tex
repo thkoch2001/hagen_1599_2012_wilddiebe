@@ -4,7 +4,7 @@
 OpenVPN ermöglicht die Einrichtung eines virtuellen privaten Netzwerkes (VPN),
 das auf Secure Socket Layer (SSL) basiert. Die VPN-Tunnelendpunkte werden durch
 virtuelle Schnittstellen realisiert. OpenVPN arbeitet nicht im Kernel-Space des
-Betriebssystems, sondern im User-Space. Während eines SSL-Handshakes werden
+Betriebssystems, sondern im User-Space. Während eines SSL\hyp Handshakes werden
 starke symmetrische Verschlüsselungsverfahren vereinbart, so dass die
 Vertraulichkeit der Daten während der Übertragung durch das VPN gesichert
 ist. Die Authentisierung erfolgt über X.509-Zertifikate oder durch vorab
@@ -48,11 +48,11 @@ wurde.
 
 Die Konfiguration von OpenVPN ist sehr einfach. Auf der Client-Seite reicht
 bereits eine wenige Zeilen lange Konfigurationsdatei. Die Einrichten des
-OpenVPN-Zugangs wird schrittweise am Beispiel von Windows XP erläutert.
+OpenVPN\hyp Zugangs wird schrittweise am Beispiel von Windows XP erläutert.
 
 \paragraph{Schritt 1}
 Herunterladen der OpenVPN-Software (Windows Installer
-``openvpn-2.2.2-install.exe'') von der Adresse
+\path{openvpn-2.2.2-install.exe}) von der Adresse
 \url{http://openvpn.net/index.php/download/community-downloads.html} und
 Installation dieser.
 
@@ -73,20 +73,20 @@ Die zip-Datei enthält unter anderem
 
 \begin{itemize}
   \item den Zertifikatgenerator
-  \item den öffentlichen Schlüssel ``RootCA.muellerbackwaren.crt'' des
+  \item den öffentlichen Schlüssel \path{RootCA.muellerbackwaren.crt} des
     Zertifikatservers (notwendig, um das ausgestellte Zertifikat in eine
     Vertrauensstellung zu bringen)
-  \item das Cross-Zertifikat ``RootCA.mayerbrot.local.cross.crt'' (notwendig, um
+  \item das Cross-Zertifikat \path{RootCA.mayerbrot.local.cross.crt} (notwendig, um
     auch im Netz des Fusionspartners sichere Verbindungen herzustellen)
-  \item die Dateien ``UserCA.muellerbackwaren.crt'' und
-    ``ServerCA.muellerbackwaren.crt'' (diese sind jeweils zweckgebunden zu
+  \item die Dateien \path{UserCA.muellerbackwaren.crt} und
+    \path{ServerCA.muellerbackwaren.crt} (diese sind jeweils zweckgebunden zu
     verwenden)
 \end{itemize}
 
 \paragraph{Schritt 3}
 
 Entpacken obiger zip-Datei und Ausführen des Generators
-``ssl\_cert\_request\_generator.jar''.  Dazu ist es erforderlich, dass eine
+\path{ssl\_cert\_request\_generator.jar}.  Dazu ist es erforderlich, dass eine
 aktuelle Java Ausführungsumgebung (JRE) auf dem Rechner installiert ist.
 
 \paragraph{Schritt 4}
@@ -97,8 +97,8 @@ Rücksende-E-Mail-Adresse), welche mit den Herrn Naues vorliegenden Personaldate
 
 \paragraph{Schritt 5}
 
-Erzeugen des privaten Schlüssels durch einen Klick auf den Button ``Erzeugen''.
-Der Dateiname sollte die Endung *.key haben (z.B. ``StefanTaeuberKey.key'').
+Erzeugen des privaten Schlüssels durch einen Klick auf den Button \glqq{}Erzeugen\grqq{}.
+Der Dateiname sollte die Endung *.key haben (z.B. \path{StefanTaeuberKey.key}).
 
 \paragraph{Schritt 6}
 
@@ -114,43 +114,43 @@ Zertifikatinhabers) bekommt man schließlich kurze Zeit später als E-Mail-Anhan
 
 \paragraph{Schritt 8 - Importieren der Zertifikate bei Windows XP}
 
-Die Datei ``RootCA.muellerbackwaren.crt'' muss beim Import manuell in die
+Die Datei \path{RootCA.muellerbackwaren.crt} muss beim Import manuell in die
 vertrauenswürdigen Stammzertifizierungsstellen eingefügt werden. Die anderen
 Zertifikate können dann automatisch importiert werden.
 
 \begin{itemize}
-  \item ``Start''
-  \item ``Ausführen''
-  \item Eingabe von ``certmgr.msc''
-  \item ``OK''
-  \item ``Vertrauenswürdige Stammzertifizierungsstellen'' auswählen
-  \item auf Objekttyp ``Zertifikate'' mit der rechten Maustaste klicken
-  \item ``Alle Tasks''
-  \item ``Importieren\ldots''
-  \item im Zertifikatsimport-Assistenten auf ``Weiter'' klicken
-  \item Ort des Zertifikates ``(Durch)suchen''
-  \item Zertifikat auswählen und ``Öffnen'' anklicken
-  \item ``Weiter''
-  \item untere Option ``Alle Zertifikate in folgendem Speicher speichern'' auswählen
-  \item ``Weiter''
-  \item ``Fertigstellen''
+  \item \glqq{}Start\grqq{}
+  \item \glqq{}Ausführen\grqq{}
+  \item Eingabe von \path{certmgr.msc}
+  \item \glqq{}OK\grqq{}
+  \item \glqq{}Vertrauenswürdige Stammzertifizierungsstellen\grqq{} auswählen
+  \item auf Objekttyp \glqq{}Zertifikate\grqq{} mit der rechten Maustaste klicken
+  \item \glqq{}Alle Tasks\grqq{}
+  \item \glqq{}Importieren\ldots\grqq{} 
+  \item im Zertifikatsimport-Assistenten auf \glqq{}Weiter\grqq{} klicken
+  \item Ort des Zertifikates \glqq{}(Durch)suchen\grqq{}
+  \item Zertifikat auswählen und \glqq{}Öffnen\grqq{} anklicken
+  \item \glqq{}Weiter\grqq{}
+  \item untere Option \glqq{}Alle Zertifikate in folgendem Speicher speichern\grqq{} auswählen
+  \item \glqq{}Weiter\grqq{}
+  \item \glqq{}Fertigstellen\grqq{}
 \end{itemize}
 
 Auf gleiche Weise müssen auch die Zertifikate
-``RootCA.mayerbrot.local.cross.crt'', ``UserCA.muellerbackwaren.crt'' und des
-persönlichen Zertifikate ``stefan.taeuber.muellerbackwaren.crt'' importiert
+\path{RootCA.mayerbrot.local.cross.crt}, \path{UserCA.muellerbackwaren.crt} und des
+persönlichen Zertifikate \path{stefan.taeuber.muellerbackwaren.crt} importiert
 werden.
 
 \paragraph{Schritt 9 -- Konfiguration von OpenVPN}
 
 In der zip-Datei der Zertifikatserver-Gruppe Süd (vgl. Schritt 2) ist die Datei
-``muster1.conf'' enthalten. Diese kann als Grundlage für die
-OpenVPN-Konfigurationsdatei dienen. Es müssen lediglich die Namen von privatem
+\path{muster1.conf} enthalten. Diese kann als Grundlage für die
+OpenVPN\hyp Konfigurationsdatei dienen. Es müssen lediglich die Namen von privatem
 und öffentlichem Schlüssel angepasst werden. Etwaige Probleme mit unsichtbaren
 (Linux-)Steuerzeichen lassen sich z.B. dadurch beheben, dass man die
-Konfigurationsparameter in einer ``frischen'' Textdatei manuell eintippt\ldots
+Konfigurationsparameter in einer \glqq{}frischen\grqq{} Textdatei manuell eintippt\ldots
 
-Die Konfigurationsdatei ``openvpn.config.ovpn'' wird mit Hilfe eines
+Die Konfigurationsdatei \path{openvpn.config.ovpn} wird mit Hilfe eines
 Text-Editors erstellt und enthält:
 
 \begin{lstlisting}
@@ -176,13 +176,13 @@ verb 3
 \paragraph{Schritt 10}
 
 Verschieben der vier benötigten Dateien in den Dateiordner
-\lstinline{C:\Programme\OpenVPN\config}
+\path{C:\Programme\OpenVPN\config}
 
 \begin{enumerate}
-  \item ``ca-bundle.txt'' (enthält die erforderlichen root- und intermediate-Zertifikate)
-  \item ``StefanTaeuberKey.key'' (privater ``Wilddieb-Schlüssel'')
-  \item ``stefan.taeuber.muellerbackwaren.crt'' (signiertes ``Wilddieb-Zertifikat'')
-  \item ``openvpn.config.ovpn''
+  \item \path{ca-bundle.txt} (enthält die erforderlichen root- und intermediate-Zertifikate)
+  \item \path{StefanTaeuberKey.key} (privater \glqq{}Wilddieb-Schlüssel\grqq{})
+  \item \path{stefan.taeuber.muellerbackwaren.crt} (signiertes \glqq{}Wilddieb-Zertifikat\grqq{})
+  \item \path{openvpn.config.ovpn} 
 \end{enumerate}
 
 \paragraph{Schritt 11 -- Einloggen ins Firmennetz mit OpenVPN}
@@ -194,8 +194,8 @@ grafischen Bedienoberfläche OpenVPN GUI bequem ins Firmennetz einwählen.
 
 Das entsprechende Symbol (zwei kleine rote Monitore) in der Startleiste mit der
 linken Maustaste doppelt anklicken (alternativ: rechte Maustaste, danach
-``Connect'' auswählen), dann das in Schritt 6 vergebene geheime Passwort für den
-privaten Schlüssel eintippen und mit ``OK'' bestätigen.
+\glqq{}Connect\grqq{} auswählen), dann das in Schritt 6 vergebene geheime Passwort für den
+privaten Schlüssel eintippen und mit \glqq{}OK\grqq{} bestätigen.
 
 Die beiden kleinen Monitore des OpenVPN GUI-Symbols verfärben sich zunächst gelb
 und wechseln schließlich nach erfolgreichem Verbindungsaufbau auf grün.

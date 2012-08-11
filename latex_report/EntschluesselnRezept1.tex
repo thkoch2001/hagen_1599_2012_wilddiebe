@@ -8,31 +8,6 @@
 \caption{Der verschlüsselte Text von Rezept 1}
 \end{figure}
 
-Um einen chiffrierten Text zu entschlüsseln beginnt man grundlegend mit der Kryptoanalyse. 
-
-\subsubsection{Kryptoanalyse}
-
-Die Kryptoanalyse hat das Ziel, Informationen über den Inhalt eines chiffrierten
-Textes auch ohne Kenntnis des Schlüssels zu erhalten. Es werden verschiedene
-Angriffsszenarien auf ein Kryptosystem unterschieden. Da lediglich der
-chiffrierte Text bekannt war, wurde Ciphertext-Only gewählt. Es wurde mit der
-Häufigkeitsanalyse begonnen.
-
-\paragraph{Häufigkeitsanalyse}
-
-\begin{figure}
- \includegraphics[width=\textwidth,keepaspectratio=true]{Images/buchstabenhaeufigkeiten_de}
- \includegraphics[width=\textwidth,keepaspectratio=true]{Images/buchstabenhaeufigkeiten_en}
- \caption{Häufigkeitsverteilung von Buchstaben im Deutschen (oben) und Englischen (unten) \cite[kap2.pdf, s. 30]{Koebler}}
- \label{fig:buchstabenhaeufigkeiten}
-\end{figure}
-
-In jeder Sprache kommen die einzelnen Buchstaben in einem ausreichend langen,
-natürlichen Text in einer für die Sprache charakteristischen Häufigkeit vor
-(siehe \cref{fig:buchstabenhaeufigkeiten}). Im Deutschen ist der am
-häufigsten vorkommende Buchstabe das E mit einer Häufigkeit von etwa 17\%,
-gefolgt vom N mit etwa 10\%.
-
 \begin{table}[h]\footnotesize
 \begin{tabular}{*{22}{r}}
   `` ``  &  `` ``  &  `` ``  &  ,  &  -  &  .  &  0  &  1  &  2  &  3  &  4  &  5  &  6  &  :  &  B  &  F  &  G  &  H & I & J  &  M \\
@@ -55,31 +30,13 @@ Die Häufigkeit der einzelnen Zeichen im verschlüsselten Rezept wurde mit einem
 Onlinetool\footnote{\url{http://www.woerter-zaehlen.de/index.php}} gezählt und
 ist in Tabelle \ref{tab:rezept1haeufigkeit} wiedergegeben.
 
-Die Häufigkeitsanalyse ergab, dass ``e'' am häufigsten auftritt.
+Die Häufigkeitsanalyse ergab, dass \glqq{}e\grqq{} am häufigsten auftritt.
 Es wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
-``Znaqryfghgra'' zu analysieren.
-
-\paragraph{Cesar Chiffre}
-
-Der Name Caesar-Chiffre stammt von dem gleichnamigen Feldherren Gaius Julius
-Cesar (100 v. Chr. – 44 v. Chr.).1 Caesar benutzte diese sehr einfache Form der
-Verschlüsselung, um militärische Nachrichten zu chiffrieren.  Es kann ein
-beliebiges Alphabet verwendet werden. Die klassische Version benutzt die
-Großbuchstaben A-Z. Das Alphabet wird zweimal, untereinander aufgeschrieben.
-Nun wird das untere Alphabet um eine beliebige Anzahl Stellen verschoben. Diese
-Anzahl von Stellen ist der Schlüsselwert der Chiffre. Eine Verschiebung um 3
-nach links, also mit dem Schlüssel 3, ergibt folgende Ansicht:
-
-\begin{lstlisting}
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
-DEFGHIJKLMNOPQRSTUVWXYZABC
-
-ZNAQRYFGHGRA  -> WKXNOVCDEDOX
-\end{lstlisting}
+\glqq{}Znaqryfghgra\grqq{} zu analysieren.
 
 \paragraph{Rot-13}
 
-Als nächstes wurde mittels Rot-13 das Wort „ZNAQRYFGHGRA“ analysiert.
+Als nächstes wurde mittels Rot-13 das Wort \glqq{}ZNAQRYFGHGRA\grqq{} analysiert.
 
 Werden als Alphabet die Buchstaben A-Z gewählt und ein Schlüssel von 13, so wird
 diese Chiffre auch als Rot-13 bezeichnet. Eine Verschiebung um 13 nach links,
@@ -120,7 +77,7 @@ int rot13( int c ) {
 }
 \end{lstlisting}
 
-\begin{figure}
+\begin{quote}
 Mandelstuten
 Mehl, Zucker, 2 Eier, Bittermandelaroma, gehackte Mandeln und Butter in eine große Schüssel geben.
 Die Hefe in der lauwarmen Milch vollständig auflösen und ebenfalls in die Schüssel zu den anderen Zutaten schütten. Alles gut verkneten und zu einer Kugel formen.
@@ -131,5 +88,5 @@ Auf mittlerer Schiene bei 200 Grad Umluft ca. 35 Minuten backen.
 
 Zutaten: 1000g Weizenmehl, 400ml lauwarme Milch, 60g Zucker, 1 Würfel Hefe, 4 Eier, 50g weiche Butter, 3 Tropfen Bittermandelöl,
 150g gehackte Mandeln, 4 EL lauwarme Milch
-\end{figure}
+\end{quote}
 

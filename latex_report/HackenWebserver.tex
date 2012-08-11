@@ -28,24 +28,8 @@ eintippen, kommen wir auch nicht weiter.
 
 Nachdem \Metasploit{} bereits beim Dateiserver gute Dienste geleistet hat,
 versuchen wir den Webserver auf ähnliche Weise zu attackieren. Durch den
-vorausgegangenen Portscan (siehe \cref{fig:nmap}) haben wir schon eine Liste der
-offenen Ports erhalten (siehe \cref{WebserverPortScan}).
-
-\begin{table}[H]
-\caption{Offene Ports des Webservers}
-\label{WebserverPortScan}
-\centering
-\begin{tabular}{llll}
-\toprule
-Port & name & proto & info\\
-\midrule
-22 & & tcp & \\
-80 & http & tcp & Apache (302-https://172.16.14.30/) \\
-443 & https & tcp & \\
-2049 & nfsd & udp & NFS Daemon 100005 v1\\
-\bottomrule
-\end{tabular}
-\end{table}
+vorausgegangenen Portscan haben wir schon eine Liste der
+offenen Ports erhalten (siehe \cref{fig:offeneports}).
 
 Um eventuelle Schwachstellen zu entdecken starten wir \Armitage{}. Anschließend
 fügen wir den Host 172.16.14.30 hinzu und führen einen Scan aus. Wenn dieser

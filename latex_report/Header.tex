@@ -1,3 +1,5 @@
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+
 \documentclass[%
 	titlepage,			% es wird eine Titelseite verwendet
 	%parskip=full,		% Abstand zwischen Absätzen (volle Zeile)=full halbe zeille = half
@@ -30,7 +32,8 @@
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{bibgerm}
-\usepackage{filecontents}
+%\usepackage{filecontents}
+
 \usepackage[
 pdftitle={Fachpraktikum 01599: IT-Sicherheit},
 pdfsubject={Wilddiebe 3},
@@ -46,6 +49,7 @@ bookmarksopen=true,
 bookmarksopenlevel=3,
 plainpages=false,
 pdfpagelabels=true]{hyperref}
+
 \usepackage[german]{cleveref}
 
 %Formatierung geht ab hier los:
@@ -100,8 +104,8 @@ string=[b]",%
 string=[b]'%
 commentstyle=\color{greencomments},%
 keywordstyle=\color{bluekeywords}\bfseries,%
-stringstyle=\ttfamily \color{redstrings},%
-basicstyle=\scriptsize%
+stringstyle=\color{redstrings},%
+basicstyle=\ttfamily%
 }
 
 \lstnewenvironment{MetasploitCode}[2]
@@ -120,6 +124,15 @@ basicstyle=\scriptsize%
  \caption{#2}
  \label{fig:#1}
 \end{figure}}
+
+\newcommand{\bilddateisloppy}[3]{%
+\begin{figure}[htp]
+ \centering
+ \includegraphics[width=#3\textwidth,keepaspectratio=true]{Images/#1}
+ \caption{#2}
+ \label{fig:#1}
+\end{figure}}
+
 \newcommand{\bildref}[1]{\cref{fig:#1}}
 
 \newcommand{\Mayerbrot}{\emph{Mayer Brot}}
@@ -127,11 +140,18 @@ basicstyle=\scriptsize%
 \newcommand{\Metasploit}{\emph{Metasploit}}
 \newcommand{\Armitage}{\emph{Armitage}}
 \newcommand{\Firefox}{\emph{Firefox}}
+\newcommand{\Windows}{\emph{Windows}}
+\newcommand{\Zenmap}{\emph{Zenmap}}
+\newcommand{\Nmap}{\emph{Nmap}}
 \newcommand{\zB}{z.\,B.}
 \newcommand{\va}{v.\,a.}
 \newcommand{\dH}{d.\,h.}
+
+\usepackage{hyphenat}
 
 \hyphenation{Sys-tem-ad-mi-nis-tra-tor}
 \hyphenation{So-cial}
 \hyphenation{En-gi-nee-ring}
 \hyphenation{Home-page}
+\hyphenation{Hand-shakes}
+\hyphenation{Open-VPN}
