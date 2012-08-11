@@ -4,9 +4,35 @@
 
 \subsubsection{Zugriff auf den Dateiserver}
 
-Um an die Rezepte zu kommen, versuchen wir über den \emph{Windows Explorer} auf den Dateiserver zuzugreifen.
-Dazu geben wir den Pfad \textbackslash\textbackslash172.16.14.40 ein. Daraufhin werden insbesondere die Freigaben \path{public} und \path{Geheimrezepte} aufgelistet. Unter der Freigabe \path{public} ist das erste Rezept in verschlüsselter Form frei zugänglich\footnote{Die Entschlüsselung
-  des Rezepts wird in \cref{RezeptEinsEntschluesseln} gezeigt}. Die Freigabe \path{Geheimrezepte} ist aber geschützt, so das wir darauf nicht zugreifen können. Da es sehr unwahrscheinlich ist, das richtige Kennwort zu erraten, werden wir auf Hacking-Tools zugreifen.
+Aus den offenen Ports des Rechners \path{datei.mayerbrot.local} kann man
+schließen, dass es sich um einen Windows Server handelt.
+
+Um an die Rezepte zu kommen, versuchen wir über den \emph{Windows Explorer} auf
+den Dateiserver zuzugreifen.  Dazu geben wir den Pfad
+\textbackslash\textbackslash172.16.14.40 ein. Daraufhin werden insbesondere die
+Freigaben \path{public} und \path{Geheimrezepte} aufgelistet. Unter der Freigabe
+\path{public} ist das erste Rezept in verschlüsselter Form frei
+zugänglich\footnote{Die Entschlüsselung des Rezepts wird in
+  \cref{RezeptEinsEntschluesseln} gezeigt}.
+
+Auf das public Verzeichnis kann alternativ auch von einem Linux oder Free-BSD
+Rechner einfach zugegriffen werden. Dazu wird die Freigabe
+\glqq{}gemountet\grqq{} und die Dateien können mit regulären UNIX Befehlen
+angesehen und kopiert werden:
+
+\begin{lstlisting}
+\% mkdir /mnt/cifs
+\% sudo mount -t cifs //172.16.14.40/public /mnt/cifs
+\% cd /mnt/cifs
+\% ls
+Rezept1NR.txt  testdatei.txt
+\% cp -v Rezept1NR.txt /home/xxx
+`Rezept1NR.txt' -> `/home/xxx/Rezept1NR.txt'
+\end{lstlisting}
+
+ Die Freigabe \path{Geheimrezepte} ist aber geschützt, so das wir darauf nicht
+ zugreifen können. Da es sehr unwahrscheinlich ist, das richtige Kennwort zu
+ erraten, werden wir auf Hacking-Tools zugreifen.
 
 \subsubsection{Metasploit}
 
@@ -14,8 +40,12 @@ Das \Metasploit{}-Projekt ist ein freies Open-Source-Projekt zur
 Computersicherheit, das Informationen über Sicherheitslücken bietet und bei
 Penetrationstests sowie der Entwicklung von IDS-Signaturen(? @TODO) eingesetzt
 werden kann. Das bekannteste Teilprojekt ist das \emph{Metasploit Framework}, ein
-Werkzeug zur Entwicklung und Ausführung von Exploits gegen verteilte
-Zielrechner. Andere wichtige Teilprojekte sind das Shellcode-Archiv und
+Werkzeug zur Entwicklung und Ausführung von Exploits\footnote{Ein Exploit dient
+  dem Eindringen in ein Zielsystem, indem ein Programmfehler ausgenutzt wird.} gegen verteilte
+Zielrechner. Andere wichtige Teilprojekte sind das Shellcode-Archiv\footnote{Payload (Nutzlast) bezeichnet den Code, der auf dem
+  Zielrechner bei einem erfolgreichen Einbruch ausgeführt werden soll. Meist ist
+  dies Shellcode, der dem Angreifer ermöglicht auf eine Shell zuzugreifen. Es
+  könnte aber auch ein Meterpreter oder VNC-Server ausgeführt werden.} und
 Forschung im Bereich der IT-Sicherheit.
 
 Für den Zugriff auf das \emph{Metasploit Framework} gibt es verschiedene Benutzeroberflächen. 
@@ -36,49 +66,6 @@ jetzt rot dargestellt wir und mit Blitzen versehen ist. Jetzt können wir versch
 Um das zweite Rezept herunter zu laden gehen wir im Kontextmenü über \emph{Meterpreter 1} und \emph{Explore} zu \emph{\glqq{}Browse files\grqq{}}. Daraufhin erscheint eine Registerkarte, mit den Dateien und Verzeichnissen des Dateiservers. Jetzt können zum Verzeichnis \path{C:\Geheimrezepte} navigieren und anschließend über das Kontextmenü das verschlüsselte Rezept\footnote{Die Entschlüsselung des Rezepts wird in \cref{RezeptZweiEntschluesseln} gezeigt} herunterladen (siehe \bildref{DateiserverHacken3}).
 
 \bilddateisloppy{DateiserverHacken3}{Datei herunterladen}{0.7}
-
-Aus den offenen Ports des Rechners \path{datei.mayerbrot.local} kann man
-schließen, dass es sich um einen Windows Server handelt. Es wurde mit
-\\172.16.14.40 versucht, sich die Freigaben anzuzeigen. Es war zu diesem
-Zeitpunkt nur public zu sehen. Auf das public Verzeichnis kann von einem Linux
-oder Free-BSD Rechner einfach zugegriffen werden. Dazu wird die Freigabe
-\glqq{}gemountet\grqq{} und die Dateien können mit regulären UNIX Befehlen angesehen und
-kopiert werden:
-
-\subsubsection{Zugriff auf den Dateiserver}
-
-Aus den offenen Ports des Rechners \path{datei.mayerbrot.local} kann man
-schließen, dass es sich um einen Windows Server handelt. Es wurde mit
-\\172.16.14.40 versucht, sich die Freigaben anzuzeigen. Es war zu diesem
-Zeitpunkt nur public zu sehen. Auf das public Verzeichnis kann von einem Linux
-oder Free-BSD Rechner einfach zugegriffen werden. Dazu wird die Freigabe
-\glqq{}gemountet\grqq{} und die Dateien können mit regulären UNIX Befehlen angesehen und
-kopiert werden:
-
-\begin{lstlisting}
-\% mkdir /mnt/cifs
-\% sudo mount -t cifs //172.16.14.40/public /mnt/cifs
-\% cd /mnt/cifs
-\% ls
-Rezept1NR.txt  testdatei.txt
-\% cp -v Rezept1NR.txt /home/xxx
-`Rezept1NR.txt' -> `/home/xxx/Rezept1NR.txt'
-\end{lstlisting}
-
-\subsubsection{Metasploit}
-
-Das Metasploit-Projekt ist ein freies Open-Source-Projekt zur
-Computersicherheit, das Informationen über Sicherheitslücken bietet und bei
-Penetrationstests sowie der Entwicklung von IDS-Signaturen(? @TODO) eingesetzt
-werden kann. Das bekannteste Teilprojekt ist das Metasploit Framework, ein
-Werkzeug zur Entwicklung und Ausführung von Exploits\footnote{Ein Exploit dient
-  dem Eindringen in ein Zielsystem, indem ein Programmfehler ausgenutzt wird.}
-gegen verteilte Zielrechner. Andere wichtige Teilprojekte sind das
-Shellcode-Archiv\footnote{Payload (Nutzlast) bezeichnet den Code, der auf dem
-  Zielrechner bei einem erfolgreichen Einbruch ausgeführt werden soll. Meist ist
-  dies Shellcode, der dem Angreifer ermöglicht auf eine Shell zuzugreifen. Es
-  könnte aber auch ein Meterpreter oder VNC-Server ausgeführt werden.} und
-Forschung im Bereich der IT-Sicherheit.
 
 \subsubsection{Benutzung von Metasploit}
 
