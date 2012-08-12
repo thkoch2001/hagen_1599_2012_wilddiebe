@@ -51,7 +51,9 @@ einfach. Auf der Client-Seite reicht bereits eine wenige Zeilen lange
 Konfigurationsdatei. Die Einrichten des OpenVPN\hyp Zugangs wird schrittweise am
 Beispiel von Windows XP erläutert.
 
-\paragraph{Schritt 1 -- Erstellung eines eigenen Zertifikats}
+\paragraph{Erstellung eines eigenen Zertifikats}
+
+\subparagraph{Schritt 1}
 Zur Erleichterung des Ablaufs und der Userinteraktion kommt ein von Michael
 Franke von der Zertifikatserver-Gruppe Süd programmiertes Java-Applet zum
 Einsatz. Dieses bietet zudem den sicherheitstechnischen Vorteil, dass der
@@ -59,7 +61,7 @@ private Schlüssel immer auf dem Rechner des Zertifikatbeantragers liegt und
 nicht über das WWW oder andere Wege verbreitet werden muss.
 
 
-\paragraph{Schritt 2}
+\subparagraph{Schritt 2}
 Downloaden des von der Zertifikatserver-Gruppe Süd erstellten SSL-Tools von der
 Adresse \url{http://major-bug.de/ssl_cert_request_generator.zip}
 
@@ -77,28 +79,28 @@ Die zip-Datei enthält unter anderem
     verwenden)
 \end{itemize}
 
-\paragraph{Schritt 3}
+\subparagraph{Schritt 3}
 
 Entpacken obiger zip-Datei und Ausführen des Generators
 \path{ssl_cert_request_generator.jar}.  Dazu ist es erforderlich, dass eine
 aktuelle Java Ausführungsumgebung (JRE) auf dem Rechner installiert ist.
 
-\paragraph{Schritt 4}
+\subparagraph{Schritt 4}
 
 Eingabe der Benutzerdaten (Vorname, Name, Bundesland, Stadt,
 Rücksende-E-Mail-Adresse), welche mit den Herrn Naues vorliegenden Personaldaten
 übereinstimmen müssen.
 
-\paragraph{Schritt 5}
+\subparagraph{Schritt 5}
 
 Erzeugen des privaten Schlüssels durch einen Klick auf den Button \glqq{}Erzeugen\grqq{}.
 Der Dateiname sollte die Endung *.key haben (\zB{} \path{StefanTaeuberKey.key}).
 
-\paragraph{Schritt 6}
+\subparagraph{Schritt 6}
 
 Vergabe eines geheimen Passworts für den privaten Schlüssel.
 
-\paragraph{Schritt 7}
+\subparagraph{Schritt 7}
 
 Abschicken der (E-Mail mit der) Signierungsanfrage an die
 Zertifikatserver-Gruppe Süd.
@@ -106,7 +108,9 @@ Zertifikatserver-Gruppe Süd.
 Das persönliche Zertifikat (mit dem signierten öffentlichen Schlüssel des
 Zertifikatinhabers) bekommt man schließlich kurze Zeit später als E-Mail-Anhang.
 
-\paragraph{Schritt 8 - Importieren der Zertifikate bei Windows XP}
+\paragraph{Importieren der Zertifikate bei Windows XP}
+
+\subparagraph{Schritt 8}
 
 Die Datei \path{RootCA.muellerbackwaren.crt} muss beim Import manuell in die
 vertrauenswürdigen Stammzertifizierungsstellen eingefügt werden. Die anderen
@@ -135,7 +139,9 @@ Auf gleiche Weise müssen auch die Zertifikate
 persönlichen Zertifikate \path{stefan.taeuber.muellerbackwaren.crt} importiert
 werden.
 
-\paragraph{Schritt 9 -- Konfiguration von OpenVPN}
+\paragraph{Konfiguration von OpenVPN}
+
+\subparagraph{Schritt 9}
 
 In der zip-Datei der Zertifikatserver-Gruppe Süd (vgl. Schritt 2) ist die Datei
 \path{muster1.conf} enthalten. Diese kann als Grundlage für die
@@ -167,7 +173,7 @@ persist-tun
 verb 3
 \end{lstlisting}
 
-\paragraph{Schritt 10}
+\subparagraph{Schritt 10}
 
 Verschieben der vier benötigten Dateien in den Dateiordner
 \path{C:\Programme\OpenVPN\config}
@@ -179,12 +185,14 @@ Verschieben der vier benötigten Dateien in den Dateiordner
   \item \path{openvpn.config.ovpn} 
 \end{enumerate}
 
-\paragraph{Schritt 11 -- Einloggen ins Firmennetz mit OpenVPN}
+\paragraph{Einloggen ins Firmennetz mit OpenVPN}
+
+\subparagraph{Schritt 11}
 
 Nachdem nun alle Vorarbeiten abgeschlossen sind, kann man sich mit Hilfe der
 grafischen Bedienoberfläche OpenVPN GUI bequem ins Firmennetz einwählen.
 
-\paragraph{Schritt 12}
+\subparagraph{Schritt 12}
 
 Das entsprechende Symbol (zwei kleine rote Monitore) in der Startleiste mit der
 linken Maustaste doppelt anklicken (alternativ: rechte Maustaste, danach
