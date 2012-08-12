@@ -1,6 +1,7 @@
 \subsection{Rezept 2 entschlüsseln}
 \label{RezeptZweiEntschluesseln}
 
+{\tiny
 \begin{lstlisting}[caption={Das verschlüsselte 2. Rezept: Rezept2NR.txt},
  linewidth=\textwidth,
  breaklines, breakatwhitespace=false]
@@ -19,23 +20,10 @@ ukr5Lsm5Bwi5gbekensga0misasdDnmneeewmmssgneeaiskdseuhs
 WasNdteaioedsvcgtnirresenuglmdlhtkIgemlseneduueeegaeof
 ahdt5tkdmneetgny0aier0ls5kiholegage0gtsS0ss
 \end{lstlisting}
+}
 
 Da lediglich wieder nur der chiffrierte Text bekannt war, wurde Ciphertext-Only
 gewählt.
-
-%\begin{table}\footnotesize
-%\begin{tabular}{*{26}{@{\hspace{1ex}}r}}
-% 0 & 1 & 2 & 3 & 5 & 7 & A & B & C & D & F & G & H & I & K & L & M & N & R & S & T & V & W & Z \\
-% 13 & 8 & 5 & 3 & 9 & 2 & 1 & 4 & 1 & 6 & 1 & 1 & 1 & 1 & 1 & 2 & 3 & 1 & 2 & 11 & 1 & 2 & 9 & 3 \\
-%\end{tabular}
-%
-%\begin{tabular}{*{26}{@{\hspace{1ex}}r}}
-% a & b & c & d & e & f & g & h & i & k & l & m & n & o & p & q & r & s & t & u & v & w & y & z \\
-% 50 & 17 & 12 & 26 & 134 & 5 & 29 & 19 & 33 & 16 & 27 & 26 & 75 & 16 & 3 & 1 & 34 & 52 & 34 & 28 & 3 & 3 & 1 & 10 \\
-%\end{tabular}
-%\caption{Häufigkeitsanalyse}
-%\label{tab:Häufigkeitsanalyse}
-%\end{table}
 
 \begin{table}
 \centering
@@ -150,25 +138,14 @@ H     r     S     b     k
 Das Programm aus Abbildung ~\ref{fig:rafeci} wurde geschrieben und benutzt um den Text zu
 entschlüsseln.
 
+Das entschlüsselte Rezept lautet:
+
+{\tiny
+\lstinputlisting[inputencoding=latin1]{entschluesselte_rezepte/Rezept2NRDatE.txt}
+}
+
 \begin{figure}[p]
 \lstinputlisting[language=C,basicstyle=\scriptsize]{listings/rafeci.c}
 \caption{rafeci.c}
 \label{fig:rafeci}
 \end{figure}
-
-Das entschlüsselte Rezept lautet:
-
-\begin{quote}
-Heidebrot
-
-Die Sonnenblumenkerne den Leinsamen und den Buchweizen mit 100ml heißem Wasser begießen, abgedeckt quellen lassen.
-Die Walnüsse mit kochendem Wasser bedecken kurz ziehen lassen, das Wasser abgießen. Die Nüsse zu den Saaten geben.
-Den Sauerteig das Roggenmehl und das Wasser gut vermischen, abgedeckt 13 Stunden bei Zimmertemperatur gehen lassen.
-Die Saatenden, Sauerteig das Vollkornmehl und das Salzfracht Minuten verkneten. In eine gefettete und mit Mehl
-ausgestaubte Kastenform geben, abdecken und 3 Stunden bei Zimmertemperatur gehen lassen. Den Backofen auf 220 Grad C vorheizen
-das Brot darin 50 Minuten backen Aus der Form nehmen abkühlen lassen.
-
-Zutaten
-250g Roggenmehl Type 1150, 175g Sauerteig Weizensauerteig, 300ml kaltes Wasser, 175g Vollkornweizenmehl, 50g
-Sonnenblumenkerne, 25g Leinsamen, 25g Buchweizen, 50g grobgehackte Walnüsse, 10g Salz, 100ml heißes Wasser
-\end{quote}

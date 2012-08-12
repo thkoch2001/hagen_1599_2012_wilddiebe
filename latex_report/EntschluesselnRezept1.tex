@@ -1,12 +1,14 @@
 \subsection{Rezept 1 entschlüsseln}
 \label{RezeptEinsEntschluesseln}
 
+{\tiny
 \lstinputlisting[caption={Das verschlüsselte 1. Rezept: Rezept1NR.txt},
  linewidth=\textwidth,
  breaklines,
   breakatwhitespace=true,
   inputencoding=latin1,
   tabsize=20]{verschluesselte_rezepte/Rezept1NR.txt}
+}
 
 \begin{table}
 \centering
@@ -94,33 +96,21 @@
 \label{tab:rezept1haeufigkeit}
 \end{table}
 
-%
-%\begin{table}[h]\footnotesize
-%\begin{tabular}{*{22}{r}}
-%  `` ``  &  `` ``  &  `` ``  &  ,  &  -  &  .  &  0  &  1  &  2  &  3  &  4  &  5  &  6  &  :  &  B  &  F  &  G  &  H & I & J  &  M \\
-%  10  &   10  &  126  &   13  &  1  &  8  &   10  &  4  &  3  &  2  &  3  &  3  &  1  &  1  &  1  &  5  &  2  &  1 & 1 & 2 & 4 \\
-%\end{tabular}
-%
-%\begin{tabular}{*{22}{r}}
-%N  &  O  &  Q  &  R  &  T  &  U  &  X  &  Y  &  Z  &  a  &  b  &  c  &  d  &  e  &  f  &  g  &  h  &  i  &  j & m \\
-%3  &      5  &      3  &      4  &      1  &      2  &      1  &      1  &     10  &     58  &     10  &      1  &      1  &     38  &     25  &     44  &     33  &      4  &      8  &      5 \\
-%\end{tabular}
-%
-%\begin{tabular}{*{20}{r}}
-%n  &  o  &  p  &  q  &  r  &  s  &  t  &  u  &  v  &  x  &  y  &  z  &  ˆ  &  \%  &  ¸  &  Å  \\
-%32  &      5  &     21  &     21  &    105  &     13  &     19  &     20  &     36  &      8  &     38  &     18  &      3  &      1  &      5  &      5  \\
-%\end{tabular}
-%\caption{Häufigkeitsanalyse}
-%\label{tab:rezept1haeufigkeit}
-%\end{table}
-
 Die Häufigkeit der einzelnen Zeichen im verschlüsselten Rezept wurde mit einem
 Onlinetool\footnote{\url{http://www.woerter-zaehlen.de/index.php}} gezählt und
 ist in Tabelle \ref{tab:rezept1haeufigkeit} wiedergegeben.
 
-Die Häufigkeitsanalyse ergab, dass \glqq{}e\grqq{} am häufigsten auftritt.
-Es wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
-\glqq{}Znaqryfghgra\grqq{} zu analysieren.
+Die Häufigkeitsanalyse ergab, dass \glqq{}e\grqq{} am häufigsten auftritt.  Es
+wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
+\glqq{}Znaqryfghgra\grqq{} zu analysieren. Eine Verschiebung um 3 nach links,
+also mit dem Schlüssel 3, ergibt folgende Ansicht:
+
+\begin{lstlisting}
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+DEFGHIJKLMNOPQRSTUVWXYZABC
+
+ZNAQRYFGHGRA  -> WKXNOVCDEDOX
+\end{lstlisting}
 
 \paragraph{Rot-13}
 
@@ -138,11 +128,14 @@ ZNAQRYFGHGRA -> MANDELSTUTEN
 \end{lstlisting}
 
 \begin{figure}[tb]
-\lstinputlisting{listings/rot13.c}
+\lstinputlisting[basicstyle=\scriptsize,language=C]{listings/rot13.c}
 \caption{Quellcode rot13.c}
 \label{listingrot13}
 \end{figure}
 
+Das entschlüsselte Rezept lautet also vollständig:
+
+{\tiny
 \begin{quote}
 Mandelstuten
 Mehl, Zucker, 2 Eier, Bittermandelaroma, gehackte Mandeln und Butter in eine große Schüssel geben.
@@ -155,4 +148,4 @@ Auf mittlerer Schiene bei 200 Grad Umluft ca. 35 Minuten backen.
 Zutaten: 1000g Weizenmehl, 400ml lauwarme Milch, 60g Zucker, 1 Würfel Hefe, 4 Eier, 50g weiche Butter, 3 Tropfen Bittermandelöl,
 150g gehackte Mandeln, 4 EL lauwarme Milch
 \end{quote}
-
+}

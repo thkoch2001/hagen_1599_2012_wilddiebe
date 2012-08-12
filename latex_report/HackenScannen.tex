@@ -16,6 +16,12 @@ Unter Free-BSD kann \Nmap{} mit folgender Befehlszeile installiert werden:
 root:~$cd /usr/ports/net/nmap && make install clean
 \end{verbatim}
 
+Mit Hilfe des Skriptes nmap.sh (Abbildung ~\ref{fig:nmap}), das nsscan.sh
+(Abbildung ~\ref{fig:nsscan}) intern aufruft erhält man eine Liste von Hosts und
+ihrer offenen Ports im Netzwerk (Abbildung ~\ref{fig:hostlist}). Die Hosts
+werden zunächst als IP Adressen aufgeführt und darunter werden die dazugehörigen
+DNS Namen aufgelistet.
+
 \begin{figure}
 \lstinputlisting[language=Metasploit]{listings/nmap.sh}
 \caption{Script für dynamischen Portscan: nmap.sh}
@@ -27,12 +33,6 @@ root:~$cd /usr/ports/net/nmap && make install clean
 \caption{Script zur Namensauflösung: nsscan.sh}
 \label{fig:nsscan}
 \end{figure}
-
-Mit Hilfe des Skriptes nmap.sh (Abbildung ~\ref{fig:nmap}), das nsscan.sh
-(Abbildung ~\ref{fig:nsscan}) intern aufruft erhält man eine Liste von Hosts und
-ihrer offenen Ports im Netzwerk (Abbildung ~\ref{fig:hostlist}). Die Hosts
-werden zunächst als IP Adressen aufgeführt und darunter werden die dazugehörigen
-DNS Namen aufgelistet.
 
 \begin{figure}
 \lstinputlisting[language=Metasploit]{listings/hostlist.txt}
