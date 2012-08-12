@@ -11,7 +11,7 @@ während der Übertragung durch das VPN gesichert ist. Die Authentisierung erfol
 über X.509-Zertifikate oder durch vorab vereinbarte Schlüssel.
 
 Der VPN-Server kann ein einfacher Server auf PC-Hardware-Basis sein, auf dem
-z.B. Linux läuft. Auf diesem Server installiert man die OpenVPN-Software.
+\zB{} Linux läuft. Auf diesem Server installiert man die OpenVPN-Software.
 
 Auf dem VPN-Client braucht man die OpenVPN-Client-Software. Auch sie ist frei
 verfügbar und läuft unter Windows, Linux oder Mac OS X.
@@ -60,7 +60,6 @@ nicht über das WWW oder andere Wege verbreitet werden muss.
 
 
 \paragraph{Schritt 2}
-
 Downloaden des von der Zertifikatserver-Gruppe Süd erstellten SSL-Tools von der
 Adresse \url{http://major-bug.de/ssl_cert_request_generator.zip}
 
@@ -74,7 +73,7 @@ Die zip-Datei enthält unter anderem
   \item das Cross-Zertifikat \path{RootCA.mayerbrot.local.cross.crt} (notwendig, um
     auch im Netz des Fusionspartners sichere Verbindungen herzustellen)
   \item die Zertifikate \path{UserCA.muellerbackwaren.crt} und
-    \path{ServerCA.muellerbackwaren.crt} (diese sind jeweils zweckgebunden zu
+    \path{ServerCA.mueller} \path{backwaren.crt} (diese sind jeweils zweckgebunden zu
     verwenden)
 \end{itemize}
 
@@ -93,7 +92,7 @@ Rücksende-E-Mail-Adresse), welche mit den Herrn Naues vorliegenden Personaldate
 \paragraph{Schritt 5}
 
 Erzeugen des privaten Schlüssels durch einen Klick auf den Button \glqq{}Erzeugen\grqq{}.
-Der Dateiname sollte die Endung *.key haben (z.B. \path{StefanTaeuberKey.key}).
+Der Dateiname sollte die Endung *.key haben (\zB{} \path{StefanTaeuberKey.key}).
 
 \paragraph{Schritt 6}
 
@@ -121,7 +120,7 @@ Zertifikate können dann automatisch importiert werden.
   \item \glqq{}Vertrauenswürdige Stammzertifizierungsstellen\grqq{} auswählen
   \item auf Objekttyp \glqq{}Zertifikate\grqq{} mit der rechten Maustaste klicken
   \item \glqq{}Alle Tasks\grqq{}
-  \item \glqq{}Importieren\ldots\grqq{} 
+  \item \glqq{}Importieren~\dots\grqq{} 
   \item im Zertifikatsimport-Assistenten auf \glqq{}Weiter\grqq{} klicken
   \item Ort des Zertifikates \glqq{}(Durch)suchen\grqq{}
   \item Zertifikat auswählen und \glqq{}Öffnen\grqq{} anklicken
@@ -142,13 +141,13 @@ In der zip-Datei der Zertifikatserver-Gruppe Süd (vgl. Schritt 2) ist die Datei
 \path{muster1.conf} enthalten. Diese kann als Grundlage für die
 OpenVPN\hyp Konfigurationsdatei dienen. Es müssen lediglich die Namen von privatem
 und öffentlichem Schlüssel angepasst werden. Etwaige Probleme mit unsichtbaren
-(Linux-)Steuerzeichen lassen sich z.B. dadurch beheben, dass man die
-Konfigurationsparameter in einer \glqq{}frischen\grqq{} Textdatei manuell eintippt\ldots
+(Linux-)Steuerzeichen lassen sich \zB{} dadurch beheben, dass man die
+Konfigurationsparameter in einer \glqq{}frischen\grqq{} Textdatei manuell eintippt~\dots
 
 Die Konfigurationsdatei \path{openvpn.config.ovpn} wird mit Hilfe eines
 Text-Editors erstellt und enthält:
 
-\begin{lstlisting}
+\begin{lstlisting}[keywordstyle=\color{black}]
 client
 float
 dev tap
@@ -174,9 +173,9 @@ Verschieben der vier benötigten Dateien in den Dateiordner
 \path{C:\Programme\OpenVPN\config}
 
 \begin{enumerate}
-  \item \path{ca-bundle.txt} (enthält die erforderlichen root- und intermediate-Zertifikate)
-  \item \path{StefanTaeuberKey.key} (privater \glqq{}Wilddieb-Schlüssel\grqq{})
-  \item \path{stefan.taeuber.muellerbackwaren.crt} (signiertes \glqq{}Wilddieb-Zertifikat\grqq{})
+  \item \path{ca-bundle.txt} (enthält die erforderlichen root- und intermediate\hyp Zertifikate)
+  \item \path{StefanTaeuberKey.key} (privater \glqq{}Wilddiebe-Schlüssel\grqq{})
+  \item \path{stefan.taeuber.muellerbackwaren.crt} (signiertes \glqq{}Wilddiebe\hyp Zertifikat\grqq{})
   \item \path{openvpn.config.ovpn} 
 \end{enumerate}
 

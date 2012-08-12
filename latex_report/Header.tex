@@ -22,6 +22,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern} %Type1-Schriftart für nicht-englische Texte
 \usepackage{amsmath}
+\usepackage{MnSymbol}
 \usepackage[activate]{pdfcprot}
 \usepackage{graphicx} % jpg  png  pdf  mps
 \usepackage{xcolor}
@@ -80,6 +81,16 @@ pdfpagelabels=true]{hyperref}
 \definecolor{bluekeywords}{rgb}{0.13,0.13,1}
 \definecolor{greencomments}{rgb}{0,0.5,0}
 \definecolor{redstrings}{rgb}{0.9,0,0}
+\definecolor{black}{rgb}{0,0,0}
+
+\lstnewenvironment{MyCode}
+{
+ \lstset{prebreak=\raisebox{0ex}[0ex][0ex]
+       {\ensuremath{\rhookswarrow}},
+       postbreak=\raisebox{0ex}[0ex][0ex]
+        {\ensuremath{\rcurvearrowse\space}}
+       }}
+       {}
 
 \lstset{language=[Sharp]C,
 frameround=single,
@@ -112,6 +123,11 @@ basicstyle=\ttfamily \scriptsize%
   {\lstset{language=Metasploit, tabsize=2}}
   {}
 
+\lstnewenvironment{RezeptCode}[2]
+  {\lstset{extendedchars=\true,
+    inputencoding=utf8}}
+  {}
+
 \setcounter{tocdepth}{4}  % = Aufnahme in das Inhaltsverzeichnis *
 \setcounter{secnumdepth}{4}%   = Nummerierung vertiefen *
 
@@ -132,6 +148,10 @@ basicstyle=\ttfamily \scriptsize%
  \caption{#2}
  \label{fig:#1}
 \end{figure}}
+
+%\renewcommand*\lstlistingname{Code-Beispiel}
+%\newcaptionname{german}{\lstlistingname}{Code-Beispiel}
+%\renewcommand{\lstlistingname}{Code-Beispiel}
 
 \newcommand{\bildref}[1]{\cref{fig:#1}}
 
@@ -155,3 +175,5 @@ basicstyle=\ttfamily \scriptsize%
 \hyphenation{Home-page}
 \hyphenation{Hand-shakes}
 \hyphenation{Open-VPN}
+\hyphenation{Wild-diebe}
+\hyphenation{Zer-ti-fi-kat}
