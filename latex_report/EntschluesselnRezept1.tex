@@ -10,7 +10,23 @@
   tabsize=20]{verschluesselte_rezepte/Rezept1NR.txt}
 }
 
-\begin{table}
+Die Häufigkeit der einzelnen Zeichen im verschlüsselten Rezept wurde mit einem
+Onlinetool\footnote{\url{http://www.woerter-zaehlen.de/index.php}} gezählt und
+ist in Tabelle \ref{tab:rezept1haeufigkeit} wiedergegeben.
+
+Die Häufigkeitsanalyse ergab, dass \glqq{}e\grqq{} am häufigsten auftritt.
+Es wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
+\glqq{}Znaqryfghgra\grqq{} zu analysieren. Eine Verschiebung um 3 nach links,
+also mit dem Schlüssel 3, ergibt folgende Ansicht:
+
+\begin{lstlisting}
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+DEFGHIJKLMNOPQRSTUVWXYZABC
+
+ZNAQRYFGHGRA  -> WKXNOVCDEDOX
+\end{lstlisting}
+
+\begin{table}[H]
 \centering
 \begin{tabular}{ccccc}
 \toprule
@@ -96,22 +112,6 @@
 \label{tab:rezept1haeufigkeit}
 \end{table}
 
-Die Häufigkeit der einzelnen Zeichen im verschlüsselten Rezept wurde mit einem
-Onlinetool\footnote{\url{http://www.woerter-zaehlen.de/index.php}} gezählt und
-ist in Tabelle \ref{tab:rezept1haeufigkeit} wiedergegeben.
-
-Die Häufigkeitsanalyse ergab, dass \glqq{}e\grqq{} am häufigsten auftritt.  Es
-wurde als nächstes versucht, mittels der Caesar Chiffre das Wort
-\glqq{}Znaqryfghgra\grqq{} zu analysieren. Eine Verschiebung um 3 nach links,
-also mit dem Schlüssel 3, ergibt folgende Ansicht:
-
-\begin{lstlisting}
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
-DEFGHIJKLMNOPQRSTUVWXYZABC
-
-ZNAQRYFGHGRA  -> WKXNOVCDEDOX
-\end{lstlisting}
-
 \paragraph{Rot-13}
 
 Als nächstes wurde mittels Rot-13 das Wort \glqq{}ZNAQRYFGHGRA\grqq{} analysiert.
@@ -127,10 +127,13 @@ N O P Q R S T U V W X Y Z
 ZNAQRYFGHGRA -> MANDELSTUTEN
 \end{lstlisting}
 
+Es wurde das Programm aus Abbildung ~\ref{fig:listingrot13} geschrieben und
+benutzt um das Rezept 1 zu entschlüsseln.
+
 \begin{figure}[tb]
 \lstinputlisting[basicstyle=\scriptsize,language=C]{listings/rot13.c}
 \caption{Quellcode rot13.c}
-\label{listingrot13}
+\label{fig:listingrot13}
 \end{figure}
 
 Das entschlüsselte Rezept lautet also vollständig:

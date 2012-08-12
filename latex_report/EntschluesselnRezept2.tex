@@ -25,7 +25,11 @@ ahdt5tkdmneetgny0aier0ls5kiholegage0gtsS0ss
 Da lediglich wieder nur der chiffrierte Text bekannt war, wurde Ciphertext-Only
 gewählt.
 
-\begin{table}
+Die Häufigkeitsanalyse ergab, dass \glqq{}e\grqq{} wieder am häufigsten auftritt. Das
+Dechiffrieren des Textbeginns mit der Caesar Chiffre ergibt ein sinnloses
+\glqq{}EOPYHBPKRW1\grqq{}, rot-13 ergibt \glqq{}UEFOXRFAHM1\grqq{}.
+
+\begin{table}[H]
 \centering
 \begin{tabular}{ccccc}
 \toprule
@@ -101,10 +105,6 @@ gewählt.
 \label{tab:Häufigkeitsanalyse2}
 \end{table}
 
-Die Häufigkeitsanalyse ergab, dass \glqq{}e\grqq{} wieder am häufigsten auftritt. Das
-Dechiffrieren des Textbeginns mit der Caesar Chiffre ergibt ein sinnloses
-\glqq{}EOPYHBPKRW1\grqq{}, rot-13 ergibt \glqq{}UEFOXRFAHM1\grqq{}.
-
 \subsubsection*{Rail Fence Cipher}
 
 Diese Chiffre nennt sich Rail Fence Cipher, aufgrund der Art wie der
@@ -138,14 +138,14 @@ H     r     S     b     k
 Das Programm aus Abbildung ~\ref{fig:rafeci} wurde geschrieben und benutzt um den Text zu
 entschlüsseln.
 
-Das entschlüsselte Rezept lautet:
-
-{\tiny
-\lstinputlisting[inputencoding=latin1]{entschluesselte_rezepte/Rezept2NRDatE.txt}
-}
-
 \begin{figure}[p]
 \lstinputlisting[language=C,basicstyle=\scriptsize]{listings/rafeci.c}
 \caption{rafeci.c}
 \label{fig:rafeci}
 \end{figure}
+
+Das entschlüsselte Rezept lautet:
+
+{\tiny
+\lstinputlisting[inputencoding=latin1]{entschluesselte_rezepte/Rezept2NRDatE.txt}
+}
