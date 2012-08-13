@@ -14,7 +14,7 @@ Freigaben \path{public} und \path{Geheimrezepte} aufgelistet. Unter der Freigabe
 zugänglich\footnote{Die Entschlüsselung des Rezepts wird in
   \cref{RezeptEinsEntschluesseln} gezeigt}.
 
-Auf das public Verzeichnis kann alternativ auch von einem Linux oder Free-BSD
+Auf das Verzeichnis \path{public} kann alternativ auch von einem Linux oder Free-BSD
 Rechner einfach zugegriffen werden. Dazu wird die Freigabe
 \glqq{}gemountet\grqq{} und die Dateien können mit regulären UNIX Befehlen
 angesehen und kopiert werden:
@@ -47,7 +47,7 @@ Andere wichtige Teilprojekte sind das Shellcode-Archiv\footnote{Payload
   (Nutzlast) bezeichnet den Code, der auf dem Zielrechner bei einem
   erfolgreichen Einbruch ausgeführt werden soll. Meist ist dies Shellcode, der
   dem Angreifer ermöglicht auf eine Shell zuzugreifen. Es könnte aber auch ein
-  Meterpreter (spezielle Metasploit shell) oder VNC-Server ausgeführt werden.}
+  Meterpreter (spezielle Metasploit shell) oder VNC-Server ausgeführt werden.},
 Werkzeuge zur weiteren Analyse oder Manipulation eines übernommenen Systems
 (Post)\footnote{Hierunter fallen beispielsweise das Auslesen von System-
   bzw. Anwendungsinformationen, das Installieren einer permanenten Hinterür und
@@ -57,16 +57,16 @@ Werkzeuge zur weiteren Analyse oder Manipulation eines übernommenen Systems
 Die Hilfswerkzeuge sind im einzelnen:
 
 \begin{itemize}
-  \item ``Scanner'' zur Analyse von Computerssystemen.
-  \item ``Sniffer'' zur Aufzeichnung des Datenverkehrs eines Netzwerks.
-  \item ``Spoofer'' zur Manipulation von Netzwerkprotokollen. (ARP/MAC/DHCP, DNS)
-  \item ``Fuzzers'' Automatisierte Tests, die mit Hilfe von ungültigen,
+  \item \glqq{}Scanner\grqq{} zur Analyse von Computerssystemen.
+  \item \glqq{}Sniffer\grqq{} zur Aufzeichnung des Datenverkehrs eines Netzwerks.
+  \item \glqq{}Spoofer\grqq{} zur Manipulation von Netzwerkprotokollen. (ARP/MAC/DHCP, DNS)
+  \item \glqq{}Fuzzers\grqq{} Automatisierte Tests, die mit Hilfe von ungültigen,
     unerwarteten oder zufälligen Daten einen Dienst auf sicherheitsrelevante
     Probleme untersuchen.
   \item Serverdienste und Clients. (FTP, SMTP, DNS, DHCP, POP3, usw.)
 \end{itemize}
 
-Für Verwendung des Frameworks stehen mehrere Alternativen zur Verfügung:
+Für die Verwendung des Frameworks stehen mehrere Alternativen zur Verfügung:
 
 \begin{itemize}
   \item msfconsole --- Eine interaktive Konsolenanwendung
@@ -208,7 +208,7 @@ Priv: Timestomp Commands
 \end{lstlisting}
 
 Nun können wir nach dem Rezept suchen:
-\begin{lstlisting}[language=Metasploit]
+\begin{lstlisting}[language=Metasploit,keywordstyle=\color{black}]
 Listing: C:\
 
 ============
